@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Silent Bell — a bell that never rings</title>
+<meta name="description" content="Silent Bell taps your wrist at random moments. No sound, nothing on screen — a quiet prompt to notice where your attention is. For Apple Watch. Pay once.">
+<link rel="canonical" href="https://silentbell.app/">
+
+<!-- Social preview -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://silentbell.app/">
+<meta property="og:title" content="Silent Bell — a bell that never rings">
+<meta property="og:description" content="Random, silent taps on your wrist. A mindfulness bell you feel instead of hear.">
+<meta property="og:image" content="https://silentbell.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- Newsreader is self-hosted rather than loaded from Google Fonts: a page whose
+     headline claim is "no network, no analytics" should not hand every visitor's
+     IP address to a third party. -->
+<link rel="stylesheet" href="fonts/newsreader.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div style="min-height:100vh;background:#000;display:flex;flex-direction:column;align-items:center">
+
+  <!-- Header -->
+  <header class="wrap" style="padding:28px clamp(20px,5vw,48px);display:flex;align-items:center;justify-content:space-between">
+    <div style="display:flex;align-items:center;gap:10px">
+      <svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="7" fill="#CFA86F"></circle>
+        <circle cx="32" cy="32" r="19" fill="none" stroke="#CFA86F" stroke-opacity="0.5" stroke-width="4"></circle>
+        <circle cx="32" cy="32" r="30" fill="none" stroke="#CFA86F" stroke-opacity="0.2" stroke-width="3"></circle>
+      </svg>
+      <span style="font-size:14px;font-weight:600;letter-spacing:.12em;color:#E8E2D8">SILENT BELL</span>
+    </div>
+    <a href="#get" style="font-size:14px;color:#8a8378">Get the app</a>
+  </header>
+
+  <!-- Hero -->
+  <section class="wrap" style="padding:clamp(48px,10vh,110px) clamp(20px,5vw,48px) clamp(56px,9vh,96px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(40px,6vw,80px);justify-content:center">
+    <div style="flex:1 1 380px;max-width:560px">
+      <h1 style="margin:0;font-weight:300;font-size:clamp(42px,6.4vw,76px);line-height:1.06;letter-spacing:-0.01em;color:#EDE7DB;text-wrap:balance">A bell that never rings.</h1>
+      <p style="margin:26px 0 0;font-size:clamp(17px,1.8vw,20px);line-height:1.6;max-width:44ch;color:#B8B2A6">Silent Bell taps your wrist at random moments. No sound. Nothing on screen. Just a quiet question, felt and not heard: where is your attention right now?</p>
+      <div style="display:flex;align-items:center;gap:20px;margin-top:36px;flex-wrap:wrap">
+        <a href="#get" style="display:inline-flex;align-items:center;height:48px;padding:0 26px;border-radius:24px;background:#CFA86F;color:#12100e;font-size:15px;font-weight:600">Get Silent Bell</a>
+        <span style="font-size:14px;color:#6b6558">Apple Watch · pay once</span>
+      </div>
+    </div>
+
+    <!-- Watch mockup. Text matches the shipping app exactly. -->
+    <div style="flex:0 0 auto">
+      <div style="position:relative;background:#1d1d20;border-radius:96px;padding:11px;box-shadow:0 30px 80px rgba(0,0,0,.7)">
+        <div style="position:absolute;right:-7px;top:88px;width:8px;height:44px;border-radius:4px;background:#343437"></div>
+        <div style="position:absolute;right:-6px;top:148px;width:6px;height:70px;border-radius:3px;background:#2a2a2d"></div>
+        <div style="width:278px;height:340px;background:#000;border-radius:80px;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding:16px 17px 17px;box-sizing:border-box">
+          <div style="font-size:20px;font-weight:600;color:#fff">10:07</div>
+          <svg width="50" height="50" viewBox="0 0 64 64" style="margin-top:14px" aria-hidden="true">
+            <circle cx="32" cy="32" r="6.5" fill="#CFA86F"></circle>
+            <circle cx="32" cy="32" r="17" fill="none" stroke="#CFA86F" stroke-opacity="0.55" stroke-width="3"></circle>
+            <circle cx="32" cy="32" r="28" fill="none" stroke="#CFA86F" stroke-opacity="0.25" stroke-width="3"></circle>
+          </svg>
+          <div style="font-size:31px;font-weight:600;color:#CFA86F;margin-top:4px">Active</div>
+          <div style="font-size:21px;color:#E5E5EA;margin-top:15px">Next tap around 10:19</div>
+          <div style="font-size:16px;color:#8E8E93;margin-top:5px">Session Ends at 11:04</div>
+          <div style="flex:1"></div>
+          <div style="width:100%;height:66px;border-radius:33px;background:#1C1C1E;color:#EBEBF0;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:600">Stop</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The problem -->
+  <section class="wrap rule" style="padding:clamp(64px,11vh,120px) clamp(20px,5vw,48px)">
+    <div style="max-width:640px;margin:0 auto;text-align:center">
+      <p class="serif" style="margin:0;font-weight:300;font-size:clamp(28px,3.6vw,42px);line-height:1.3;color:#EDE7DB;text-wrap:balance">Set a reminder for every hour, and by Thursday your brain has deleted it.</p>
+      <p style="margin:28px auto 0;font-size:17px;line-height:1.7;max-width:52ch;color:#B8B2A6">Anything predictable becomes wallpaper. The chime you expect is the chime you stop hearing. Silent Bell never lets you expect it — each tap lands at a random moment, so it stays a surprise, and a surprise is the one thing attention can't ignore.</p>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="wrap rule" style="padding:clamp(56px,9vh,100px) clamp(20px,5vw,48px)">
+    <div class="eyebrow" style="margin-bottom:40px">HOW IT WORKS</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:36px 44px">
+      <div>
+        <div class="beat-n">i</div>
+        <div class="beat-t">Start it</div>
+        <div class="beat-d">Open the app, tap Start. Choose how many taps an hour feels right — one to ten. Then put your wrist down.</div>
+      </div>
+      <div>
+        <div class="beat-n">ii</div>
+        <div class="beat-t">It finds you</div>
+        <div class="beat-d">Taps land at random moments. You can't brace for one, so you can't tune it out. Each one is a small return.</div>
+      </div>
+      <div>
+        <div class="beat-n">iii</div>
+        <div class="beat-t">Only you know</div>
+        <div class="beat-d">No sound. No banner. Nothing on the watch face. To everyone around you, nothing happened.</div>
+      </div>
+      <div>
+        <div class="beat-n">iv</div>
+        <div class="beat-t">Through everything</div>
+        <div class="beat-d">Do Not Disturb, Sleep, Work Focus — the tap arrives anyway. It's yours, not a notification.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy -->
+  <section class="wrap rule" style="padding:clamp(64px,11vh,120px) clamp(20px,5vw,48px)">
+    <div style="max-width:620px;margin:0 auto;text-align:center">
+      <p class="serif" style="margin:0;font-weight:300;font-size:clamp(26px,3.2vw,38px);line-height:1.35;color:#EDE7DB;text-wrap:balance">Nothing leaves your wrist, because there is no data.</p>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:34px">
+        <span class="pill">No account</span>
+        <span class="pill">No network</span>
+        <span class="pill">No analytics</span>
+        <span class="pill">No sound, ever</span>
+      </div>
+      <p style="margin:26px auto 0;font-size:15px;line-height:1.7;color:#9d968a;max-width:48ch">Don't take our word for it. The source code is <a href="https://github.com/jakublipinski/Silent-Bell">public and auditable</a> — every line the app runs, readable by anyone.</p>
+    </div>
+  </section>
+
+  <!-- An honest note -->
+  <section class="wrap rule" style="padding:clamp(56px,9vh,100px) clamp(20px,5vw,48px)">
+    <div style="max-width:560px;margin:0 auto">
+      <div class="eyebrow">AN HONEST NOTE</div>
+      <p class="serif" style="margin:22px 0 0;font-weight:300;font-size:clamp(24px,2.8vw,32px);line-height:1.4;color:#EDE7DB">Apple pauses background sessions after an hour. So Silent Bell pauses too.</p>
+      <p style="margin:20px 0 0;font-size:16px;line-height:1.7;color:#9d968a">When it does, your watch gives one last pattern you'll recognise, and a note appears: <em>Silent Bell paused. Tap Resume to start a new session.</em> One touch starts the next hour.</p>
+      <p style="margin:16px 0 0;font-size:16px;line-height:1.7;color:#9d968a">We could dress this up as a feature. Honestly, it's a platform limit — but it makes a fair bell of its own. Once an hour, you notice the noticing stopped, and you choose to begin again.</p>
+    </div>
+  </section>
+
+  <!-- Get it -->
+  <section id="get" class="wrap rule" style="padding:clamp(64px,11vh,120px) clamp(20px,5vw,48px) clamp(48px,8vh,80px);text-align:center">
+    <svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true">
+      <circle cx="32" cy="32" r="7" fill="#CFA86F"></circle>
+      <circle cx="32" cy="32" r="19" fill="none" stroke="#CFA86F" stroke-opacity="0.5" stroke-width="4"></circle>
+      <circle cx="32" cy="32" r="30" fill="none" stroke="#CFA86F" stroke-opacity="0.2" stroke-width="3"></circle>
+    </svg>
+    <p class="serif" style="margin:24px 0 0;font-weight:300;font-size:clamp(28px,3.4vw,40px);color:#EDE7DB">Pay once. Keep it forever.</p>
+    <p style="margin:14px 0 0;font-size:16px;color:#9d968a">$2.99, one time. Free for the first three days. No subscription — that would be noise.</p>
+    <div style="display:flex;justify-content:center;margin-top:32px">
+      <!-- TODO: replace with the real App Store URL once the app is approved. -->
+      <a href="#get" aria-label="Download on the App Store" style="display:inline-flex;align-items:center;gap:11px;height:56px;padding:0 24px;border-radius:12px;background:#fff;color:#000">
+        <svg width="22" height="26" viewBox="0 0 22 26" aria-hidden="true"><path d="M18.1 13.7c0-3 2.5-4.5 2.6-4.6-1.4-2.1-3.6-2.4-4.4-2.4-1.9-.2-3.7 1.1-4.6 1.1-.9 0-2.4-1.1-4-1-2 0-3.9 1.2-5 3-2.1 3.7-.5 9.1 1.5 12.1 1 1.5 2.2 3.1 3.8 3 1.5-.1 2.1-1 3.9-1s2.3 1 4 1c1.6 0 2.7-1.5 3.7-2.9 1.2-1.7 1.6-3.3 1.7-3.4-.1-.1-3.2-1.3-3.2-4.9zM15 4.6c.8-1 1.4-2.4 1.2-3.8-1.2 0-2.7.8-3.5 1.8-.8.9-1.5 2.3-1.3 3.7 1.4.1 2.8-.7 3.6-1.7z" fill="#000"></path></svg>
+        <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.15"><span style="font-size:11px">Download on the</span><span style="font-size:19px;font-weight:600;letter-spacing:-.01em">App Store</span></span>
+      </a>
+    </div>
+    <p style="margin:56px 0 0;font-size:13px;color:#4f4a41">
+      Silent Bell · made quietly ·
+      <a href="https://github.com/jakublipinski/Silent-Bell" style="color:#6b6558">source on GitHub</a> ·
+      <a href="privacy.html" style="color:#6b6558">privacy</a> ·
+      <a href="support.html" style="color:#6b6558">support</a>
+    </p>
+  </section>
+
+</div>
+</body>
+</html>

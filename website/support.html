@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support — Silent Bell</title>
+<meta name="description" content="Help with Silent Bell for Apple Watch: why sessions pause, hiding the Smart Stack card, and troubleshooting taps.">
+<link rel="canonical" href="https://silentbell.app/support.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="fonts/newsreader.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="wrap" style="margin:0 auto;padding:28px clamp(20px,5vw,48px);display:flex;align-items:center;gap:10px">
+  <a href="/" style="display:flex;align-items:center;gap:10px">
+    <svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true">
+      <circle cx="32" cy="32" r="7" fill="#CFA86F"></circle>
+      <circle cx="32" cy="32" r="19" fill="none" stroke="#CFA86F" stroke-opacity="0.5" stroke-width="4"></circle>
+      <circle cx="32" cy="32" r="30" fill="none" stroke="#CFA86F" stroke-opacity="0.2" stroke-width="3"></circle>
+    </svg>
+    <span style="font-size:14px;font-weight:600;letter-spacing:.12em;color:#E8E2D8">SILENT BELL</span>
+  </a>
+</header>
+
+<main class="prose">
+  <h1 class="serif">Support</h1>
+  <p class="lede">The fastest way to report a bug or ask for help is <a href="https://github.com/jakublipinski/Silent-Bell/issues">GitHub Issues</a>. Everything is handled in the open.</p>
+
+  <h2>Why does it pause after an hour?</h2>
+  <p>Apple limits how long any app may keep running in the background to one hour. When Silent Bell reaches that limit it pauses and plays a distinct descending pattern, and a note appears on your watch: <em>Silent Bell paused. Tap Resume to start a new session.</em> One tap starts the next hour.</p>
+  <p>This is a platform limit, not a fault, and no app can avoid it while behaving the way Silent Bell does.</p>
+
+  <h2>How do I hide the dot and the Smart Stack card?</h2>
+  <p>While a session is running, watchOS shows a small indicator at the top of the screen and a Silent Bell card in the Smart Stack. That is the system telling you an app is running in the background — Silent Bell does not create it and cannot switch it off.</p>
+  <p>You can turn it off yourself:</p>
+  <ul>
+    <li>On the watch: <strong>Settings → Smart Stack → Live Activities</strong>, and turn it off for Silent Bell (or off entirely).</li>
+  </ul>
+  <p>This is purely cosmetic. Taps and the session itself are unaffected.</p>
+
+  <h2>I'm not feeling any taps</h2>
+  <ul>
+    <li>Check the app says <strong>Active</strong> — not Paused or Stopped.</li>
+    <li>Taps are random. At one tap per hour there can be a long wait; try a higher rate to confirm it is working.</li>
+    <li>Check <strong>Settings → Sounds &amp; Haptics</strong> and raise the haptic strength, or turn on Prominent Haptics.</li>
+    <li>Make sure the watch is snug against your wrist.</li>
+  </ul>
+
+  <h2>Does it work in Do Not Disturb or a Focus?</h2>
+  <p>Yes. The taps are not notifications, so no Focus mode can silence them. The one exception is the <em>paused</em> note at the end of a session — that is a notification, so a Focus may hold it back. You will still feel the descending pattern.</p>
+
+  <h2>Do I need my iPhone?</h2>
+  <p>No. Silent Bell runs entirely on the watch. Your phone can be in another room, or off.</p>
+
+  <h2>Does it ever make a sound?</h2>
+  <p>Never. There is no audio in the app at all.</p>
+
+  <h2>Anything else</h2>
+  <p>Open an issue on <a href="https://github.com/jakublipinski/Silent-Bell/issues">GitHub</a> and it will be read.</p>
+
+  <p class="meta"><a href="/" style="color:#6b6558">Silent Bell</a> · <a href="privacy.html" style="color:#6b6558">privacy</a></p>
+</main>
+
+</body>
+</html>

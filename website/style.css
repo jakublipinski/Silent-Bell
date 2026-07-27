@@ -1,0 +1,46 @@
+/* Silent Bell — shared styles.
+   Newsreader is self-hosted (see fonts/newsreader.css): a site whose claim is
+   "no network, no analytics" should not hand every visitor's IP to a third party.
+   This stylesheet plus that font file are the only assets the pages request. */
+
+body {
+  margin: 0;
+  background: #000;
+  font-family: -apple-system, 'Helvetica Neue', system-ui, sans-serif;
+  color: #B8B2A6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: #CFA86F; text-decoration: none; }
+a:hover { color: #E0BD88; }
+::selection { background: rgba(207,168,111,.25); }
+:focus-visible { outline: 2px solid #CFA86F; outline-offset: 3px; border-radius: 4px; }
+
+h1, .serif { font-family: 'Newsreader', ui-serif, Georgia, serif; }
+.rule { border-top: 1px solid rgba(232,226,216,.08); }
+.wrap { width: 100%; max-width: 1060px; box-sizing: border-box; }
+.pill {
+  font-size: 14px; color: #B8B2A6;
+  border: 1px solid rgba(232,226,216,.14);
+  border-radius: 20px; padding: 9px 18px;
+}
+.eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .14em; color: #8a8378; }
+.beat-n { font-family: 'Newsreader', ui-serif, Georgia, serif; font-style: italic; font-size: 17px; color: #CFA86F; }
+.beat-t { font-size: 18px; font-weight: 600; color: #EDE7DB; margin-top: 10px; }
+.beat-d { font-size: 15px; line-height: 1.65; color: #9d968a; margin-top: 8px; }
+
+/* Text pages (privacy, support) */
+.prose { max-width: 62ch; margin: 0 auto; padding: 0 clamp(20px,5vw,48px) clamp(64px,10vh,110px); }
+.prose h1 {
+  font-weight: 300; font-size: clamp(34px,5vw,52px); line-height: 1.1;
+  color: #EDE7DB; margin: clamp(24px,5vh,48px) 0 0;
+}
+.prose h2 {
+  font-size: 17px; font-weight: 600; color: #EDE7DB;
+  margin: 38px 0 0;
+}
+.prose p, .prose li { font-size: 16px; line-height: 1.7; color: #B8B2A6; }
+.prose p { margin: 14px 0 0; }
+.prose ul { margin: 12px 0 0; padding-left: 20px; }
+.prose li { margin: 6px 0; }
+.prose .lede { font-size: 19px; color: #EDE7DB; margin-top: 20px; }
+.prose .meta { font-size: 13px; color: #4f4a41; margin-top: 48px; }
