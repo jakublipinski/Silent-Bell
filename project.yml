@@ -27,3 +27,8 @@ targets:
         GENERATE_INFOPLIST_FILE: NO
         CURRENT_PROJECT_VERSION: "1"
         MARKETING_VERSION: "1.0"
+        # watchOS app targets default to SKIP_INSTALL=YES, which is right when the
+        # watch app is embedded inside an iOS companion. This app is standalone, so
+        # skipping install produced an .xcarchive with an empty Products directory
+        # and xcodebuild offered no distribution methods at all.
+        SKIP_INSTALL: NO
