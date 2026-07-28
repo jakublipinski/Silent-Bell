@@ -17,7 +17,7 @@ export PATH="/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # shellcheck source=/dev/null
 [ -f ./secrets.env ] && . ./secrets.env
 
-BUNDLE_ID="app.silentbell.watch"
+BUNDLE_ID="app.silentbell.watch.watchkitapp"
 DERIVED="./build-sim-release"
 ERASE=${1:-}
 
@@ -25,14 +25,14 @@ echo "==> Generating project"
 xcodegen generate >/dev/null
 
 echo "==> Building Release for the simulator"
-xcodebuild -project SilentBell.xcodeproj -scheme SilentBell \
+xcodebuild -project SilentBell.xcodeproj -scheme SilentBellWatch \
   -configuration Release \
   -destination "generic/platform=watchOS Simulator" \
   -derivedDataPath "$DERIVED" \
   DEVELOPMENT_TEAM="${DEVELOPMENT_TEAM:-}" \
   build >/dev/null
 
-APP=$(find "$DERIVED/Build/Products" -name "SilentBell.app" -path "*simulator*" | head -1)
+APP=$(find "$DERIVED/Build/Products" -name "SilentBellWatch.app" -path "*simulator*" | head -1)
 [ -n "$APP" ] || { echo "ERROR: built app not found" >&2; exit 1; }
 echo "    $APP"
 

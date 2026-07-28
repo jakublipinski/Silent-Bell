@@ -1,9 +1,64 @@
 name: SilentBell
+
+# Two targets, and the second one is not optional.
+#
+# A "watch-only" app is watch-only at *runtime* — it needs no iPhone app to
+# function. It is not watch-only at *delivery*. The App Store has no watchOS
+# platform: `altool` accepts only {macos, ios, appletvos, visionos}, and
+# Transporter refuses a watchOS package outright with "Failed to get the enum
+# string for platform ID 6". What ships is an **iOS container app** with the
+# watch app embedded under Watch/ — which is also why a watch-only app's App
+# Store Connect record is created under iOS.
+#
+# A single watchOS target builds, signs, installs and runs perfectly well on a
+# real Watch, so nothing is wrong until the day you try to release: Xcode's
+# Distribute App then offers only Release Testing, Enterprise and Debugging,
+# with no App Store option and no explanation. `xcodebuild -exportArchive`
+# gives the same list via an error naming an empty set. Neither mentions the
+# missing container. Verified by building Xcode's own watchOS App template,
+# which produces exactly the two targets below.
 options:
   bundleIdPrefix: app.silentbell
   createIntermediateGroups: true
-targets:
+
+# Build and archive through the container: it is the deliverable, and archiving
+# the watch target alone is what produced an App-Store-ineligible archive.
+schemes:
   SilentBell:
+    build:
+      targets:
+        SilentBell: all
+    run:
+      config: Debug
+    archive:
+      config: Release
+
+targets:
+  # The delivered artifact. Contains no code and shows no UI — iOS never runs
+  # it. It exists so the submission has an iOS-platform wrapper, and it is the
+  # target that carries the registered App ID.
+  SilentBell:
+    type: application.watchapp2-container
+    platform: iOS
+    deploymentTarget: "18.0"
+    dependencies:
+      - target: SilentBellWatch
+        embed: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.silentbell.watch
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Silent Bell
+        CURRENT_PROJECT_VERSION: "1"
+        MARKETING_VERSION: "1.0"
+        CODE_SIGN_STYLE: Automatic
+        # The container is what gets archived, so it must not skip install —
+        # otherwise the .xcarchive has an empty Products directory and offers
+        # no distribution methods at all.
+        SKIP_INSTALL: NO
+
+  # The real app. Everything the user ever sees.
+  SilentBellWatch:
     type: application
     platform: watchOS
     deploymentTarget: "10.0"
@@ -25,14 +80,14 @@ targets:
         ITSAppUsesNonExemptEncryption: false
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: app.silentbell.watch
+        # Must be the container's identifier plus ".watchkitapp" — the pairing
+        # is by name, and Xcode rejects anything else.
+        PRODUCT_BUNDLE_IDENTIFIER: app.silentbell.watch.watchkitapp
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         CODE_SIGN_STYLE: Automatic
         GENERATE_INFOPLIST_FILE: NO
         CURRENT_PROJECT_VERSION: "1"
         MARKETING_VERSION: "1.0"
-        # watchOS app targets default to SKIP_INSTALL=YES, which is right when the
-        # watch app is embedded inside an iOS companion. This app is standalone, so
-        # skipping install produced an .xcarchive with an empty Products directory
-        # and xcodebuild offered no distribution methods at all.
-        SKIP_INSTALL: NO
+        TARGETED_DEVICE_FAMILY: "4"
+        # Embedded in the container rather than installed in its own right.
+        SKIP_INSTALL: YES

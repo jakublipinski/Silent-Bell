@@ -15,7 +15,7 @@ if [ -f ./secrets.env ]; then . ./secrets.env; else
   echo "ERROR: secrets.env missing — copy secrets.env.example and fill it in." >&2; exit 1
 fi
 
-APP="./build/Build/Products/Debug-watchos/SilentBell.app"
+APP="./build/Build/Products/Debug-watchos/SilentBellWatch.app"
 LOG="./run.log"
 
 exec > >(tee -a "$LOG") 2>&1
@@ -23,7 +23,7 @@ echo "===== $(date '+%Y-%m-%d %H:%M:%S') run.sh ====="
 
 xcodegen generate
 
-xcodebuild -project SilentBell.xcodeproj -scheme SilentBell \
+xcodebuild -project SilentBell.xcodeproj -scheme SilentBellWatch \
   -destination "generic/platform=watchOS" \
   -allowProvisioningUpdates \
   -derivedDataPath ./build \

@@ -51,8 +51,15 @@ Built and verified on an Apple Watch Series 7. The bundle identifier is
 
 ## Architecture
 
-Standalone watchOS app, SwiftUI, single target, no iOS companion. Small by
-design — no coordinator layer. Source files in `SilentBell/`:
+Standalone watchOS app, SwiftUI. Small by design — no coordinator layer.
+
+Two targets, though only one contains anything. `SilentBellWatch` (watchOS) is
+the app. `SilentBell` (iOS) is an empty **container** that exists solely so the
+app can be submitted — see "Releasing to the App Store", because this is not
+optional and nothing tells you until release day. Every source file belongs to
+the watch target; the container has no code and never runs.
+
+Source files in `SilentBell/`:
 
 | File | Role |
 |---|---|
@@ -360,34 +367,42 @@ xcrun devicectl device install app --device <WATCH_UDID> \
 
 ## Releasing to the App Store
 
-**`./release.sh`** produces `build-export/SilentBell.ipa`, signed for distribution
-and ready to upload. Prerequisites, all one-time:
+### A watch-only app is not watch-only at delivery
 
-1. An **Apple Distribution** certificate. Xcode → Settings → Accounts → the team →
-   *Manage Certificates* → **+** → Apple Distribution.
-2. An **App Store provisioning profile** for `app.silentbell.watch`, created in the
-   developer portal under *Profiles → + → Distribution → App Store Connect*.
-   Download it and double-click to install.
-3. `DIST_PROFILE` in `secrets.env`, set to that profile's exact name.
+**This is the single most expensive thing in this document.** A "watch-only" app
+needs no iPhone app *to run*. It absolutely needs one *to ship*.
 
-Then:
+The App Store has no watchOS platform. `altool` accepts only
+`{macos, ios, appletvos, visionos}`, and Transporter refuses a watchOS package
+outright:
 
-```bash
-./release.sh          # generate → archive → verify → package
+```
+Failed to get the enum string for platform ID 6
 ```
 
-Upload the result with **Transporter** (free, Mac App Store): drag the `.ipa` in and
-press Deliver. Transporter validates before uploading and names the specific
-problem when something is wrong, which `xcodebuild` does not.
+What ships is an **iOS container app** with the watch app embedded under `Watch/`.
+The container holds the App ID and is the thing archived, uploaded and reviewed;
+iOS never launches it and it contains no code. This is also why a watch-only app's
+App Store Connect record is created under the **iOS** platform — it genuinely is an
+iOS submission.
 
-**Bump `CURRENT_PROJECT_VERSION` in `project.yml` before every re-upload** — App
-Store Connect refuses a build number it has already accepted.
+```
+SilentBell            (iOS container,  app.silentbell.watch)   ← archived & shipped
+└── Watch/
+    └── SilentBellWatch  (watchOS,     app.silentbell.watch.watchkitapp)
+```
 
-### Why the release path is hand-rolled
+The watch app's identifier **must** be the container's plus `.watchkitapp`; the
+pairing is by name and Xcode rejects anything else. `SKIP_INSTALL` is `YES` on the
+watch app (it is embedded, not installed) and `NO` on the container (it is the
+deliverable — an archive whose container skips install has an empty `Products`
+directory and offers no distribution methods at all).
 
-The documented route — archive with automatic signing, then re-sign via
-`xcodebuild -exportArchive` with `method: app-store-connect` — **does not work for
-this app**. It always fails with:
+**Nothing warns you.** A single watchOS target builds, signs, installs and runs
+perfectly on a real Watch. The failure appears only on release day, as an absence:
+Xcode's *Distribute App* offers Release Testing, Enterprise and Debugging, with no
+App Store option and no explanation. `xcodebuild -exportArchive` says the same
+thing via an error naming an empty set:
 
 ```
 error: exportArchive exportOptionsPlist error for key "method"
@@ -395,26 +410,35 @@ error: exportArchive exportOptionsPlist error for key "method"
        but found app-store-connect
 ```
 
-App Store is absent from the methods xcodebuild believes are available, and
-Xcode's own *Distribute App* window offers the same four choices. Each plausible
-cause was eliminated in turn: a valid Apple Distribution certificate exists; an
-explicit App Store profile exists (no device list, `get-task-allow` false);
-re-archiving after both existed changed nothing; the team is not Enterprise and has
-shipped App Store apps before. The list is derived from the archive itself and
-appears to be simply wrong for watch-only archives.
+Neither mentions a container. Hours went into eliminating the plausible causes —
+a valid Apple Distribution certificate, an explicit App Store provisioning profile,
+a freshly rebuilt archive, Enterprise-vs-Company account type, `xcodebuild` versus
+the IDE — and every one was a dead end. What settled it was creating a throwaway
+project from Xcode's own **watchOS → App** template and finding it produced *two*
+targets. If you are ever stuck like this again, **build the template and diff it**;
+it took three minutes and answered what hours of theorising had not.
 
-`release.sh` therefore skips the re-signing step: it archives with **manual**
-distribution signing, so the app is already signed exactly as the App Store
-requires, then packages it. An `.ipa` is only a zip with the app under `Payload/`,
-so once the signature is correct there is nothing left for `exportArchive` to do.
-The script refuses to package anything not signed by an Apple Distribution identity,
-or whose embedded profile lists devices — both are development mistakes that
-App Store Connect would otherwise reject minutes later with a vaguer message.
+### Doing a release
 
-One related trap, since it cost an afternoon: watchOS application targets default to
-`SKIP_INSTALL=YES`, which is correct only when the watch app is embedded in an iOS
-companion. Left alone it yields an `.xcarchive` with an empty `Products` directory
-and no distribution methods at all. `project.yml` sets it to `NO`.
+```bash
+./release.sh          # generate → archive container → export → build-export/SilentBell.ipa
+```
+
+Prerequisites, both one-time:
+
+1. An **Apple Distribution** certificate — Xcode → Settings → Accounts → the team →
+   *Manage Certificates* → **+** → Apple Distribution. Note the team cap: do not
+   revoke someone else's to make room.
+2. `DEVELOPMENT_TEAM` in `secrets.env`.
+
+Automatic signing creates the provisioning profiles, including the watch app's
+`.watchkitapp` one. Upload with **Transporter** (free, Mac App Store) — drag the
+`.ipa` in and press Deliver — or from Xcode's Organizer via *Distribute App → App
+Store Connect*. Transporter validates first and names the specific problem, which
+`xcodebuild` does not.
+
+**Bump `CURRENT_PROJECT_VERSION` in `project.yml` — in _both_ targets — before every
+re-upload.** App Store Connect refuses a build number it has already accepted.
 
 ## Testing — results
 
