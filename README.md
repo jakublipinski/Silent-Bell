@@ -358,6 +358,64 @@ xcrun devicectl device install app --device <WATCH_UDID> \
            ./build/Build/Products/Debug-watchos/SilentBell.app
 ```
 
+## Releasing to the App Store
+
+**`./release.sh`** produces `build-export/SilentBell.ipa`, signed for distribution
+and ready to upload. Prerequisites, all one-time:
+
+1. An **Apple Distribution** certificate. Xcode → Settings → Accounts → the team →
+   *Manage Certificates* → **+** → Apple Distribution.
+2. An **App Store provisioning profile** for `app.silentbell.watch`, created in the
+   developer portal under *Profiles → + → Distribution → App Store Connect*.
+   Download it and double-click to install.
+3. `DIST_PROFILE` in `secrets.env`, set to that profile's exact name.
+
+Then:
+
+```bash
+./release.sh          # generate → archive → verify → package
+```
+
+Upload the result with **Transporter** (free, Mac App Store): drag the `.ipa` in and
+press Deliver. Transporter validates before uploading and names the specific
+problem when something is wrong, which `xcodebuild` does not.
+
+**Bump `CURRENT_PROJECT_VERSION` in `project.yml` before every re-upload** — App
+Store Connect refuses a build number it has already accepted.
+
+### Why the release path is hand-rolled
+
+The documented route — archive with automatic signing, then re-sign via
+`xcodebuild -exportArchive` with `method: app-store-connect` — **does not work for
+this app**. It always fails with:
+
+```
+error: exportArchive exportOptionsPlist error for key "method"
+       expected one {release-testing, enterprise, debugging}
+       but found app-store-connect
+```
+
+App Store is absent from the methods xcodebuild believes are available, and
+Xcode's own *Distribute App* window offers the same four choices. Each plausible
+cause was eliminated in turn: a valid Apple Distribution certificate exists; an
+explicit App Store profile exists (no device list, `get-task-allow` false);
+re-archiving after both existed changed nothing; the team is not Enterprise and has
+shipped App Store apps before. The list is derived from the archive itself and
+appears to be simply wrong for watch-only archives.
+
+`release.sh` therefore skips the re-signing step: it archives with **manual**
+distribution signing, so the app is already signed exactly as the App Store
+requires, then packages it. An `.ipa` is only a zip with the app under `Payload/`,
+so once the signature is correct there is nothing left for `exportArchive` to do.
+The script refuses to package anything not signed by an Apple Distribution identity,
+or whose embedded profile lists devices — both are development mistakes that
+App Store Connect would otherwise reject minutes later with a vaguer message.
+
+One related trap, since it cost an afternoon: watchOS application targets default to
+`SKIP_INSTALL=YES`, which is correct only when the watch app is embedded in an iOS
+companion. Left alone it yields an `.xcarchive` with an empty `Products` directory
+and no distribution methods at all. `project.yml` sets it to `NO`.
+
 ## Testing — results
 
 Two things verified independently (a randomised schedule must not be debugged
