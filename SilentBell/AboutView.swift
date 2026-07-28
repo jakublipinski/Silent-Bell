@@ -73,10 +73,36 @@ struct IntroView: View {
 struct AboutView: View {
     var body: some View {
         ScrollView {
-            AboutBody()
-                .padding(.horizontal, 8)
-                .padding(.bottom, 10)
+            VStack(spacing: 0) {
+                AboutBody()
+                footer
+            }
+            .padding(.horizontal, 8)
+            .padding(.bottom, 10)
         }
         .navigationTitle("About")
+    }
+
+    /// Version and home page. Deliberately here and not in `AboutBody`, so the
+    /// first-run intro stays a welcome rather than a colophon.
+    ///
+    /// The address is plain text, not a `Link`: watchOS has no browser to hand it
+    /// to, so a tappable link would promise something it cannot do.
+    private var footer: some View {
+        VStack(spacing: 2) {
+            Text(Self.version)
+            Text("silentbell.app")
+        }
+        .font(.system(size: 12))
+        .foregroundStyle(Design.footer)
+        .frame(maxWidth: .infinity)
+        .padding(.top, 16)
+    }
+
+    private static var version: String {
+        let info = Bundle.main.infoDictionary
+        let short = info?["CFBundleShortVersionString"] as? String ?? "—"
+        let build = info?["CFBundleVersion"] as? String ?? "—"
+        return "Version \(short) (\(build))"
     }
 }
