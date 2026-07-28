@@ -37,10 +37,13 @@ h1, .serif { font-family: 'Newsreader', ui-serif, Georgia, serif; }
 .prose h2 {
   font-size: 17px; font-weight: 600; color: #EDE7DB;
   margin: 38px 0 0;
+  /* Linked-to headings (e.g. support.html#refund) shouldn't sit flush
+     against the top of the viewport. */
+  scroll-margin-top: 24px;
 }
 .prose p, .prose li { font-size: 16px; line-height: 1.7; color: #B8B2A6; }
 .prose p { margin: 14px 0 0; }
-.prose ul { margin: 12px 0 0; padding-left: 20px; }
+.prose ul, .prose ol { margin: 12px 0 0; padding-left: 20px; }
 .prose li { margin: 6px 0; }
 .prose .lede { font-size: 19px; color: #EDE7DB; margin-top: 20px; }
 .prose .meta { font-size: 13px; color: #4f4a41; margin-top: 48px; }
