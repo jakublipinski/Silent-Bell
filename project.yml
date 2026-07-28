@@ -19,6 +19,10 @@ targets:
         WKWatchOnly: true
         WKBackgroundModes:
           - physical-therapy
+        # The app contains no encryption of any kind. Declaring it here answers
+        # App Store Connect's export-compliance question at upload time instead
+        # of once per build by hand.
+        ITSAppUsesNonExemptEncryption: false
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: app.silentbell.watch
