@@ -222,7 +222,7 @@ Four signals, defined in `Haptics.swift`, kept distinct so they're never
 confusable:
 
 - **Reminder tap** — a single built-in, **user-selectable at runtime** via the
-  "Tap Type" picker (tapping a row plays it live and selects it). Default
+  "Tap" picker (tapping a row plays it live and selects it). Default
   **`.start`**, shown as *Gentle* (`.click` was tried and felt too subtle;
   `.notification` felt like a real system alert). Stored in `@AppStorage` under
   `Haptics.reminderKey` and read live at fire time, so changing it needs no rebuild.
@@ -246,7 +246,7 @@ All settings are in-app (shown only when a session is not running), persisted wi
 |---|---|---|
 | Taps per hour | **4** | 1–10 |
 | Min. gap | **5 minutes** | 1–15 min |
-| Tap Type | **Gentle** (`.start`) | any of the 9 built-ins |
+| Tap | **Gentle** (`.start`) | any of the 9 built-ins |
 | Debug 60-second hour | off | toggle (developer screen) |
 
 Two properties worth knowing:

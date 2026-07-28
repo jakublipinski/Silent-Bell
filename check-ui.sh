@@ -17,7 +17,7 @@ export PATH="/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # shellcheck source=/dev/null
 [ -f ./secrets.env ] && . ./secrets.env
 
-BUNDLE_ID="app.silentbell"
+BUNDLE_ID="app.silentbell.watch"
 DERIVED="./build-sim-release"
 ERASE=${1:-}
 

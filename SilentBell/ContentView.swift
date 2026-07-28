@@ -167,7 +167,7 @@ struct ContentView: View {
             NavigationLink {
                 ReminderTapView(selectedRaw: $reminderHapticRaw)
             } label: {
-                SettingRow(label: "Tap Type",
+                SettingRow(label: "Tap",
                            value: hapticName(reminderHapticRaw),
                            showChevron: true)
             }
