@@ -307,6 +307,16 @@ of scheduled and fired timestamps, 60-second debug mode, resume notification.
   also sidesteps that limitation.)
 - **Active time-of-day window.** Removed (see "Scheduling model") — the user's
   deliberate start *is* the window, and sessions can't outlive the hour.
+- **Suppressing taps during Sleep Focus.** Considered and not built. `INFocusStatus`
+  is available on watchOS 8+ but exposes only a bare `isFocused` boolean — it cannot
+  say *which* Focus is active, so suppressing on it would also kill taps under Work
+  Focus and Do Not Disturb, which is the feature. HealthKit's sleep analysis is
+  retrospective, needs permission, and would forfeit the *Data Not Collected*
+  privacy label. It is also unnecessary: a session can only be started by hand with
+  the app frontmost and dies within the hour, so taps can only reach a sleeping
+  wearer who armed one in the hour before falling asleep. Note this cuts against
+  `.timeSensitive` for the resume notification, which by design breaks *through*
+  Sleep Focus.
 - iOS companion, settings sync, statistics/history/streaks.
 - Anything the wearer has to look at during normal operation.
 
