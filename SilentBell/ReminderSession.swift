@@ -38,6 +38,9 @@ final class ReminderSession: NSObject, ObservableObject, WKExtendedRuntimeSessio
     /// session — i.e. the user has already been buzzed, so the follow-up resume
     /// notification can be silent (`.passive`).
     private var didPlayPauseHaptic = false
+    /// True once the resume notification has been posted for this session, so
+    /// `didInvalidate` does not post a second one over the top.
+    private var didPostResume = false
 
     private let resumeID = "resume"
     private let resumeCategory = "RESUME_CATEGORY"
@@ -140,9 +143,12 @@ final class ReminderSession: NSObject, ObservableObject, WKExtendedRuntimeSessio
     /// Dev helper: the graceful-expiry sequence as actually experienced — our
     /// Focus-proof haptic, then the silent (`.passive`) resume notification.
     func fireTestResumePassive() {
-        rlog.notice("test PASSIVE resume: haptic now, silent notification in 5s")
+        // Mirrors the real graceful-expiry order: notification first, haptic second,
+        // both immediately. Simulating the old order (haptic, then a delayed
+        // notification) would reproduce the very lag this was changed to remove.
+        rlog.notice("test PASSIVE resume: silent notification now, then haptic")
+        scheduleResumeNotification(fireAt: nil, passive: true)
         Haptics.playPaused()
-        scheduleResumeNotification(fireAt: Date().addingTimeInterval(5), passive: true)
     }
 
     // MARK: - Scheduling (one tap at a time)
@@ -218,6 +224,7 @@ final class ReminderSession: NSObject, ObservableObject, WKExtendedRuntimeSessio
             self.phase = .active
             self.startedAt = Date()
             self.didPlayPauseHaptic = false
+            self.didPostResume = false
             self.expiry = s.expirationDate
             // Anchor the bucket grid to the start moment so all taps land inside this session.
             self.scheduler = Scheduler(config: self.config,
@@ -243,6 +250,19 @@ final class ReminderSession: NSObject, ObservableObject, WKExtendedRuntimeSessio
         DispatchQueue.main.async {
             self.logStore.append("pausing", Date(), "session ending — resume")
             rlog.notice("willExpire (graceful) — \(Self.context(), privacy: .public)")
+
+            // Post the notification *before* the haptic, and both from here rather
+            // than from didInvalidate. watchOS calls willExpire seconds ahead of the
+            // cap so an app can wind down while its session is still valid; posting
+            // at didInvalidate meant the nudge trailed the haptic by that whole
+            // window — long enough that raising your wrist showed nothing, and the
+            // notification appeared a few seconds later.
+            //
+            // Passive: the haptic immediately below is the alert, so the
+            // notification only needs to be a tappable button in Notification Centre.
+            self.scheduleResumeNotification(fireAt: nil, passive: true)
+            self.didPostResume = true
+
             Haptics.playPaused()        // session still valid here, so the haptic lands (Focus-proof)
             self.didPlayPauseHaptic = true
         }
@@ -265,15 +285,32 @@ final class ReminderSession: NSObject, ObservableObject, WKExtendedRuntimeSessio
             self.logStore.append("invalidated", Date(), "\(detail) · \(Self.context())")
             rlog.error("session INVALIDATED — \(detail, privacy: .public); err=\(errStr, privacy: .public); \(Self.context(), privacy: .public)")
 
-            if reason == .none {
+            if reason == .sessionInProgress {
+                // The resume notification is posted at willExpire, seconds before the
+                // outgoing session actually dies. Tapping it inside that window asks
+                // for a new session while the old one still holds the single slot,
+                // and watchOS refuses. Wait for the old one to expire and try again,
+                // rather than stranding the user on Paused after they asked to resume.
+                self.logStore.append("retrying", Date(), "previous session still alive")
+                rlog.notice("start refused (session in progress) — retrying shortly")
+                let cfg = self.config
+                DispatchQueue.main.asyncAfter(deadline: .now() + 4) { [weak self] in
+                    guard let self, self.phase != .active else { return }
+                    self.start(config: cfg)
+                }
+            } else if reason == .none {
                 // Deliberate stop — no nudge; stop() already set the phase.
                 self.clearResumeNotifications()
             } else {
-                // Expiry or unexpected suppression — nudge to resume right now.
-                // Passive (no alerting haptic) only if willExpire already buzzed us;
-                // otherwise the notification is the only possible cue, so let it alert.
                 self.phase = .paused
-                self.scheduleResumeNotification(fireAt: nil, passive: self.didPlayPauseHaptic)
+                // A graceful expiry has already posted from willExpire. This branch
+                // is now only the early-death path: the system cut the session short
+                // with no warning, so nothing has buzzed and the notification is the
+                // only possible cue — it must alert.
+                if !self.didPostResume {
+                    self.scheduleResumeNotification(fireAt: nil, passive: false)
+                    self.didPostResume = true
+                }
             }
         }
     }
