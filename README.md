@@ -314,6 +314,12 @@ of scheduled and fired timestamps, 60-second debug mode, resume notification.
   also sidesteps that limitation.)
 - **Active time-of-day window.** Removed (see "Scheduling model") — the user's
   deliberate start *is* the window, and sessions can't outlive the hour.
+- **`.timeSensitive` for the resume notification.** Considered and rejected. It
+  would alert *through* Focus and so allow dropping the app's own pause haptic,
+  leaving one buzz instead of two — at the cost of an entitlement, and of breaking
+  through Sleep Focus by design. Once the notification was moved to `willExpire`
+  and switched to `.active`, the two haptics land together and read as a single
+  event, which settled it: the end-of-session cue is good enough as it stands.
 - **Suppressing taps during Sleep Focus.** Considered and not built. `INFocusStatus`
   is available on watchOS 8+ but exposes only a bare `isFocused` boolean — it cannot
   say *which* Focus is active, so suppressing on it would also kill taps under Work
