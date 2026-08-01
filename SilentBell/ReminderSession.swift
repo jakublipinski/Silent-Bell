@@ -34,10 +34,6 @@ final class ReminderSession: NSObject, ObservableObject, WKExtendedRuntimeSessio
     private var pending: DispatchWorkItem?
     private var config = ScheduleConfig()
     private var startedAt: Date?
-    /// True once `willExpire` has played the Focus-proof pause haptic for this
-    /// session — i.e. the user has already been buzzed, so the follow-up resume
-    /// notification can be silent (`.passive`).
-    private var didPlayPauseHaptic = false
     /// True once the resume notification has been posted for this session, so
     /// `didInvalidate` does not post a second one over the top.
     private var didPostResume = false
@@ -185,12 +181,10 @@ final class ReminderSession: NSObject, ObservableObject, WKExtendedRuntimeSessio
     /// identifier each time, so a new schedule replaces the old rather than
     /// stacking up.
     ///
-    /// `passive == true` uses `.passive` interruption level: the system files the
-    /// notification without its own alerting haptic or screen wake — used when we
-    /// already played our own (Focus-proof) pause haptic, so the notification is
-    /// just a tappable resume button. When we could *not* play a haptic (early
-    /// suppression while backgrounded), it stays active so the nudge is still felt —
-    /// otherwise the session would end silently.
+    /// `passive == true` uses the `.passive` interruption level: filed with no
+    /// alerting haptic, no screen wake and — as it turns out — no unread indicator
+    /// on the watch face. Every real path now passes `false`; only the developer
+    /// screen still posts a passive one, kept so the two can be compared on-device.
     private func scheduleResumeNotification(fireAt date: Date?, passive: Bool) {
         let content = UNMutableNotificationContent()
         content.title = "Silent Bell paused"
@@ -223,7 +217,6 @@ final class ReminderSession: NSObject, ObservableObject, WKExtendedRuntimeSessio
         DispatchQueue.main.async {
             self.phase = .active
             self.startedAt = Date()
-            self.didPlayPauseHaptic = false
             self.didPostResume = false
             self.expiry = s.expirationDate
             // Anchor the bucket grid to the start moment so all taps land inside this session.
@@ -258,13 +251,16 @@ final class ReminderSession: NSObject, ObservableObject, WKExtendedRuntimeSessio
             // window — long enough that raising your wrist showed nothing, and the
             // notification appeared a few seconds later.
             //
-            // Passive: the haptic immediately below is the alert, so the
-            // notification only needs to be a tappable button in Notification Centre.
-            self.scheduleResumeNotification(fireAt: nil, passive: true)
+            // Alerting, not passive. Passive filed the notification so quietly that
+            // nothing marked the session as over: no screen wake, and no unread dot
+            // on the watch face either. Once the haptic faded there was no trace,
+            // which is how hours of a day were lost to sessions that had quietly
+            // ended. The cost is a second buzz from the notification itself, and it
+            // now lands together with ours rather than as a delayed echo.
+            self.scheduleResumeNotification(fireAt: nil, passive: false)
             self.didPostResume = true
 
             Haptics.playPaused()        // session still valid here, so the haptic lands (Focus-proof)
-            self.didPlayPauseHaptic = true
         }
     }
 
