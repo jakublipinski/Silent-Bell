@@ -41,6 +41,12 @@ targets:
     type: application.watchapp2-container
     platform: iOS
     deploymentTarget: "18.0"
+    # The container's one piece of content: the same app icon as the watch app.
+    # App Review rejects a submission whose iPhone and Watch icons "do not
+    # sufficiently match" (guideline 2.3.8) — and a container with no icon at
+    # all shows the blank placeholder on iPhone, which cannot match anything.
+    sources:
+      - path: SilentBellContainer
     dependencies:
       - target: SilentBellWatch
         embed: true
@@ -49,7 +55,8 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: app.silentbell.watch
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_CFBundleDisplayName: Silent Bell
-        CURRENT_PROJECT_VERSION: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        CURRENT_PROJECT_VERSION: "2"
         MARKETING_VERSION: "1.0"
         CODE_SIGN_STYLE: Automatic
         # The container is what gets archived, so it must not skip install —
@@ -86,7 +93,7 @@ targets:
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         CODE_SIGN_STYLE: Automatic
         GENERATE_INFOPLIST_FILE: NO
-        CURRENT_PROJECT_VERSION: "1"
+        CURRENT_PROJECT_VERSION: "2"
         MARKETING_VERSION: "1.0"
         TARGETED_DEVICE_FAMILY: "4"
         # Embedded in the container rather than installed in its own right.
