@@ -278,7 +278,7 @@ final class ReminderSession: NSObject, ObservableObject, WKExtendedRuntimeSessio
                 errStr = "\(e.domain)#\(e.code): \(e.localizedDescription)"
             }
             let detail = "reason \(reason.rawValue) (\(Self.reasonName(reason))) ran=\(ran)s"
-            self.logStore.append("invalidated", Date(), "\(detail) · \(Self.context())")
+            self.logStore.append("invalidated", Date(), detail)   // append stamps battery itself
             rlog.error("session INVALIDATED — \(detail, privacy: .public); err=\(errStr, privacy: .public); \(Self.context(), privacy: .public)")
 
             if reason == .sessionInProgress {
@@ -369,18 +369,6 @@ final class ReminderSession: NSObject, ObservableObject, WKExtendedRuntimeSessio
     }
 
     /// Snapshot of the conditions most likely to cause a suppressedBySystem end.
-    private static func context() -> String {
-        let dev = WKInterfaceDevice.current()
-        let pct = dev.batteryLevel < 0 ? "unknown" : "\(Int(dev.batteryLevel * 100))%"
-        let batState: String
-        switch dev.batteryState {
-        case .unknown: batState = "unknown"
-        case .unplugged: batState = "unplugged"
-        case .charging: batState = "charging"
-        case .full: batState = "full"
-        @unknown default: batState = "?"
-        }
-        let lowPower = ProcessInfo.processInfo.isLowPowerModeEnabled
-        return "battery=\(pct) state=\(batState) lowPower=\(lowPower)"
-    }
+    /// Used in os_log lines; LogStore stamps the same snapshot on every entry.
+    private static func context() -> String { LogStore.batterySnapshot() }
 }

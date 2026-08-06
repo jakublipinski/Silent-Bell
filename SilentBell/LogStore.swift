@@ -35,10 +35,37 @@ final class LogStore: ObservableObject {
     }
 
     /// Newest first, matching how the log is read on screen.
+    ///
+    /// Every entry is stamped with the battery snapshot. Battery used to be
+    /// recorded only at session invalidation, which made drain analysis lopsided:
+    /// active sessions were bracketed by readings, idle gaps never were, so the
+    /// idle rate could only be inferred. With a reading on every line — including
+    /// `started` and `launched` — each idle gap gets a clean before/after pair.
     func append(_ kind: String, _ time: Date = Date(), _ detail: String = "") {
-        entries.insert(LogEntry(time: time, kind: kind, detail: detail), at: 0)
+        let stamped = detail.isEmpty
+            ? Self.batterySnapshot()
+            : "\(detail) · \(Self.batterySnapshot())"
+        entries.insert(LogEntry(time: time, kind: kind, detail: stamped), at: 0)
         if entries.count > maxEntries { entries.removeLast(entries.count - maxEntries) }
         persist()
+    }
+
+    /// Battery percentage, charging state and Low Power Mode, e.g.
+    /// `battery=85% state=unplugged lowPower=false`.
+    static func batterySnapshot() -> String {
+        let dev = WKInterfaceDevice.current()
+        dev.isBatteryMonitoringEnabled = true
+        let pct = dev.batteryLevel < 0 ? "unknown" : "\(Int(dev.batteryLevel * 100))%"
+        let state: String
+        switch dev.batteryState {
+        case .unknown: state = "unknown"
+        case .unplugged: state = "unplugged"
+        case .charging: state = "charging"
+        case .full: state = "full"
+        @unknown default: state = "?"
+        }
+        let lowPower = ProcessInfo.processInfo.isLowPowerModeEnabled
+        return "battery=\(pct) state=\(state) lowPower=\(lowPower)"
     }
 
     func clear() {
