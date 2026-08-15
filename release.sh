@@ -55,17 +55,33 @@ xcodebuild -exportArchive -archivePath "$ARCHIVE" \
   -exportOptionsPlist /tmp/SilentBellExport.plist \
   -exportPath "$OUT" -allowProvisioningUpdates >/dev/null
 
-VERSION=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$APP/Info.plist")
-BUILD=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$APP/Info.plist")
+# Read the version from the EXPORTED ipa, not from the archive. Xcode's export
+# defaults to manageAppVersionAndBuildNumber=true: it asks App Store Connect what
+# build numbers already exist and rewrites CFBundleVersion past them, unifying
+# container and watch app on the way. So the archive can say 2 while the shipped
+# binary says 3, and only the latter is the truth worth printing or filing under.
+rm -rf /tmp/SilentBellVersionPeek && mkdir -p /tmp/SilentBellVersionPeek
+unzip -qo "$OUT/SilentBell.ipa" "Payload/SilentBell.app/Info.plist" -d /tmp/SilentBellVersionPeek
+SHIPPED_PLIST=/tmp/SilentBellVersionPeek/Payload/SilentBell.app/Info.plist
+VERSION=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$SHIPPED_PLIST")
+BUILD=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$SHIPPED_PLIST")
+
+# Keep every delivered artifact. release.sh wipes build-export/ on each run, so an
+# uploaded build used to be unrecoverable the moment the next one was made — which
+# is exactly when you most want to inspect what App Review actually received.
+KEEP="./releases/SilentBell-${VERSION}-${BUILD}.ipa"
+mkdir -p ./releases
+cp "$OUT/SilentBell.ipa" "$KEEP"
 
 cat <<NOTE
 
-==> $OUT/SilentBell.ipa  —  version $VERSION ($BUILD)
+==> $KEEP  —  version $VERSION ($BUILD)
+    (also at $OUT/SilentBell.ipa, which the next run overwrites)
 
     Upload with Transporter (Mac App Store): drag the .ipa in, then Deliver.
     Or from Xcode: Organizer -> Distribute App -> App Store Connect.
 
-    Bump CURRENT_PROJECT_VERSION in project.yml (BOTH targets) before every
-    re-upload — App Store Connect rejects a build number it has already seen.
+    The build number above is assigned at export time by App Store Connect, not
+    by CURRENT_PROJECT_VERSION in project.yml — no need to bump it by hand.
 
 NOTE
