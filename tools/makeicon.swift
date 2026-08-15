@@ -38,9 +38,15 @@ func render(size S: CGFloat, to path: String) {
         ctx.strokeEllipse(in: CGRect(x: S/2 - r, y: S/2 - r, width: r*2, height: r*2))
     }
     // Fractions of the canvas, so any size renders identically.
-    ring(0.3828, 0.0293, 0.18)
-    ring(0.2930, 0.0391, 0.34)
-    ring(0.2051, 0.0508, 0.62)
+    //
+    // The falloff is deliberately shallow. A wide range (0.18 / 0.34 / 0.62) looked
+    // right at 1024px and collapsed at 120: the outer two rings stopped registering
+    // and the icon read as a dot inside a single ring — which is the shape App
+    // Review had already called a placeholder. All three must survive the home
+    // screen, so they are brighter and the outer ones thicker to hold their weight.
+    ring(0.3828, 0.0350, 0.36)
+    ring(0.2930, 0.0430, 0.55)
+    ring(0.2051, 0.0520, 0.80)
 
     // The dot is a source: glow first, then the solid core over it.
     ctx.saveGState()

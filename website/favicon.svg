@@ -16,9 +16,9 @@
   </defs>
   <rect width="64" height="64" rx="14" fill="url(#bg)"/>
   <g fill="none" stroke="#CFA86F">
-    <circle cx="32" cy="32" r="24.5" stroke-width="1.88" stroke-opacity="0.18"/>
-    <circle cx="32" cy="32" r="18.75" stroke-width="2.5" stroke-opacity="0.34"/>
-    <circle cx="32" cy="32" r="13.1" stroke-width="3.25" stroke-opacity="0.62"/>
+    <circle cx="32" cy="32" r="24.5" stroke-width="2.24" stroke-opacity="0.36"/>
+    <circle cx="32" cy="32" r="18.75" stroke-width="2.75" stroke-opacity="0.55"/>
+    <circle cx="32" cy="32" r="13.1" stroke-width="3.33" stroke-opacity="0.80"/>
   </g>
   <circle cx="32" cy="32" r="5.75" fill="#CFA86F" filter="url(#glow)"/>
 </svg>
