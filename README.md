@@ -294,11 +294,19 @@ Designed in Claude Design; implemented in `Design.swift` + `ContentView.swift`.
      ripples.
   3. *Density.* Active shows two lines of times; Paused is nearly empty — the
      silhouettes differ even when blurred by motion.
-- **App icon** — the mark reduced to two elements (dot + one ring), as the design
-  renders it in the notification badge, so it survives ~48px in the app grid. On
-  `#1C1C1E` rather than true black, because a black icon vanishes into the black
-  honeycomb. Rendered by a CoreGraphics script to a single 1024px
-  `Assets.xcassets/AppIcon.appiconset/AppIcon.png`.
+- **App icon** — the mark reduced to two elements (dot + one ring) so it survives
+  ~48px in the app grid, on a **sand `#CFA86F` field** with the mark inverted to
+  dark. The field colour is a hard App Review requirement, learned over three
+  rejection rounds: watchOS masks icons into circles shown on the black honeycomb,
+  and the HIG says verbatim *"Avoid using black for your icon's background"* — a
+  dark icon's circle boundary is invisible, which reviewers read as a *placeholder
+  icon* (guideline 2.3.8, twice) before one finally named the real rule
+  (guideline 4). A first attempt at `#1C1C1E`-on-dark "because a black icon
+  vanishes into the honeycomb" had the right diagnosis at one-tenth the required
+  dose. The sand field also survives the App Store's white product pages, where
+  the same artwork is judged on the iPhone side. Rendered by a CoreGraphics
+  script to a single 1024px, alpha-channel-free
+  `Assets.xcassets/AppIcon.appiconset/AppIcon.png`, identical in both targets.
 
 ## Feature scope
 

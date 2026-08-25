@@ -1,24 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- The app icon, as SVG. Ring radii, widths and opacities are the icon's own
-       fractions scaled to a 64 unit box, so the two stay identical by construction. -->
-  <defs>
-    <radialGradient id="bg" cx="50%" cy="50%" r="75%">
-      <stop offset="0" stop-color="#2E2C29"/>
-      <stop offset="1" stop-color="#141416"/>
-    </radialGradient>
-    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur stdDeviation="2.2" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </defs>
-  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
-  <g fill="none" stroke="#CFA86F">
-    <circle cx="32" cy="32" r="24.5" stroke-width="2.24" stroke-opacity="0.36"/>
-    <circle cx="32" cy="32" r="18.75" stroke-width="2.75" stroke-opacity="0.55"/>
-    <circle cx="32" cy="32" r="13.1" stroke-width="3.33" stroke-opacity="0.80"/>
-  </g>
-  <circle cx="32" cy="32" r="5.75" fill="#CFA86F" filter="url(#glow)"/>
+  <rect width="64" height="64" rx="14" fill="#CFA86F"/>
+  <circle cx="32" cy="32" r="8" fill="#26262A"/>
+  <circle cx="32" cy="32" r="22" fill="none" stroke="#6B5A40" stroke-width="5"/>
 </svg>

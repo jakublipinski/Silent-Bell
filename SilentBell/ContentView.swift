@@ -197,7 +197,7 @@ struct ContentView: View {
 }
 
 /// Bumped each deploy so we can confirm the Watch is running a fresh build.
-let buildTag = "iconB-1"
+let buildTag = "battery-1"
 
 /// The reminder haptics, named for how they feel rather than for the API constant.
 let hapticChoices: [(String, WKHapticType)] = [

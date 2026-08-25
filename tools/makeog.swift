@@ -1,7 +1,7 @@
 import AppKit
 import Foundation
 
-// Social preview card, 1200x630. Same mark and palette as the app icon and site.
+// Social preview card, 1200x630. Same mark and palette as the app and the site.
 
 let W: CGFloat = 1200, H: CGFloat = 630
 let sand = NSColor(srgbRed: 0xCF/255, green: 0xA8/255, blue: 0x6F/255, alpha: 1)
@@ -9,6 +9,7 @@ let cream = NSColor(srgbRed: 0xED/255, green: 0xE7/255, blue: 0xDB/255, alpha: 1
 let muted = NSColor(srgbRed: 0xB8/255, green: 0xB2/255, blue: 0xA6/255, alpha: 1)
 
 func serif(_ size: CGFloat, _ weight: NSFont.Weight = .regular) -> NSFont {
+    // New York on modern macOS; Georgia is a close enough fallback.
     if let f = NSFont(name: "NewYork-Regular", size: size) { return f }
     if let f = NSFont(name: "Georgia", size: size) { return f }
     return NSFont.systemFont(ofSize: size, weight: weight)
@@ -22,25 +23,17 @@ NSRect(x: 0, y: 0, width: W, height: H).fill()
 
 guard let ctx = NSGraphicsContext.current?.cgContext else { fatalError("no context") }
 
-// The mark: dot and three ripples, matching the app icon's proportions and
-// opacity falloff. Scaled so the outermost ring keeps the previous card's size.
+// The mark: dot and two ripples, centred horizontally, upper third.
 let cx = W / 2, cy: CGFloat = 470
 func ring(_ r: CGFloat, _ alpha: CGFloat, _ lw: CGFloat) {
     ctx.setStrokeColor(sand.withAlphaComponent(alpha).cgColor)
     ctx.setLineWidth(lw)
     ctx.strokeEllipse(in: CGRect(x: cx - r, y: cy - r, width: r * 2, height: r * 2))
 }
-ring(74, 0.18, 5.7)
-ring(56.6, 0.34, 7.5)
-ring(39.6, 0.62, 9.8)
-
-ctx.saveGState()
-ctx.setShadow(offset: .zero, blur: 13, color: sand.withAlphaComponent(0.55).cgColor)
+ring(74, 0.20, 6)
+ring(46, 0.50, 8)
 ctx.setFillColor(sand.cgColor)
-ctx.fillEllipse(in: CGRect(x: cx - 17.3, y: cy - 17.3, width: 34.6, height: 34.6))
-ctx.restoreGState()
-ctx.setFillColor(sand.cgColor)
-ctx.fillEllipse(in: CGRect(x: cx - 17.3, y: cy - 17.3, width: 34.6, height: 34.6))
+ctx.fillEllipse(in: CGRect(x: cx - 17, y: cy - 17, width: 34, height: 34))
 
 /// Draw one line centred horizontally, and vertically about `centreY`, so the
 /// stacked bands below cannot collide the way a baseline-anchored layout did.
@@ -59,6 +52,7 @@ centre("A bell that never rings.", serif(76), cream, centreY: 300)
 centre("Random, silent taps on your wrist.  ·  Apple Watch",
        NSFont.systemFont(ofSize: 29, weight: .regular), muted, centreY: 196)
 
+// Wordmark, small, at the foot.
 let para = NSMutableParagraphStyle(); para.alignment = .center
 NSAttributedString(string: "S I L E N T   B E L L", attributes: [
     .font: NSFont.systemFont(ofSize: 22, weight: .semibold),
