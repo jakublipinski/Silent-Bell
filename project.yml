@@ -77,6 +77,14 @@ targets:
       path: SilentBell/Info.plist
       properties:
         CFBundleDisplayName: Silent Bell
+        # Wired to the build settings rather than left as XcodeGen's literal
+        # "1.0"/"1". This target writes its own Info.plist
+        # (GENERATE_INFOPLIST_FILE: NO), so without these the plist ignores
+        # CURRENT_PROJECT_VERSION entirely and the About screen reports build 1
+        # no matter what was set — while the shipped ipa said 3, because export
+        # rewrites build numbers on its way out.
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         WKApplication: true
         WKWatchOnly: true
         WKBackgroundModes:
