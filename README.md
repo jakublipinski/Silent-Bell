@@ -4,7 +4,7 @@
 taps your wrist at random moments — a quiet prompt to notice where your attention
 is. No sound, no notification on the watch face, nothing anyone else can see.
 
-[silentbell.app](https://silentbell.app) · [Privacy](https://silentbell.app/privacy.html) · [Support](https://silentbell.app/support.html)
+**[Download on the App Store](https://apps.apple.com/app/id6795404742)** · [silentbell.app](https://silentbell.app) · [Privacy](https://silentbell.app/privacy.html) · [Support](https://silentbell.app/support.html)
 
 The interesting part of this project is not the taps — it is staying alive between
 them. watchOS gives an app almost no background runtime, and none of the obvious
