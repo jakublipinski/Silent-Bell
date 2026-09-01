@@ -67,7 +67,7 @@ Source files in `SilentBell/`:
 | `Scheduler.swift` | Pure, testable stratified-random tap generator. Generic over the RNG so tests can seed it; the app uses `SystemRandomNumberGenerator`. |
 | `ReminderSession.swift` | Owns the `WKExtendedRuntimeSession`, drives the scheduler one tap at a time, plays haptics, keeps the dev log. Exposes a single `Phase` (`stopped`/`starting`/`active`/`paused`) as the one source of truth for UI state. |
 | `Haptics.swift` | The four distinct haptic signals (reminder / started / stopped / paused). The reminder tap is user-selectable at runtime via `@AppStorage`. |
-| `ContentView.swift` | The three state screens (Stopped / Active / Paused), settings rows, tap-type picker, developer screen. |
+| `ContentView.swift` | The three state screens (Stopped / Active / Paused), settings rows, tap-type picker, log screen. |
 | `Design.swift` | Visual language: palette, the `RippleMark`, `PillButton`, `SettingRow`, `OptionPicker`. |
 
 Build configuration lives in `project.yml` (XcodeGen). The `.xcodeproj` is a
@@ -254,7 +254,7 @@ All settings are in-app (shown only when a session is not running), persisted wi
 | Taps per hour | **4** | 1–10 |
 | Min. gap | **5 minutes** | 1–15 min |
 | Tap | **Gentle** (`.start`) | any of the 9 built-ins |
-| Debug 60-second hour | off | toggle (developer screen) |
+| Debug 60-second hour | off | toggle (Debug builds only) |
 
 Two properties worth knowing:
 
@@ -269,10 +269,20 @@ Two properties worth knowing:
   schedule into a deterministic ladder and — once `tapsPerHour × gap > 1 hour` —
   pushing taps past the session's expiry. The cap preserves the randomness.
 
-The developer screen (behind the "Log" row) holds the 60-second debug toggle, the
-dev log, the build tag, and two **"Test resume"** buttons — *alerting* (the
-early-death path) and *silent* (the graceful-expiry path as actually felt) — to
-verify the notify → tap → auto-start flow without waiting for a real session end.
+The **"Send log"** row opens the event log — every scheduled and fired tap, each
+stamped with battery, charge state and Low Power Mode — with a share button at the
+top. It **ships in Release**: a customer reporting a problem otherwise has no way
+to get diagnostics off the wrist. Nothing is transmitted; the log is local and
+leaves the device only through the system share sheet, by hand, which is why the
+privacy answer is still *Data Not Collected*.
+
+Debug builds add three things to that screen, compiled out of the App Store build
+because they would misrepresent a shipping app: the **60-second hour** toggle, and
+two **"Test resume"** buttons — *alerting* (the early-death path) and *silent* (the
+graceful-expiry path as actually felt) — which verify the notify → tap → auto-start
+flow without waiting for a real session end. Release also ignores a stored
+60-second-hour flag rather than trusting it, since a device that once ran a Debug
+build would otherwise be stuck with it and no control to switch it off.
 
 ## Visual design
 
@@ -310,8 +320,9 @@ Designed in Claude Design; implemented in `Design.swift` + `ContentView.swift`.
 
 ## Feature scope
 
-**In:** taps/hour, minimum gap, selectable reminder haptic, start/stop/resume, dev-only log
-of scheduled and fired timestamps, 60-second debug mode, resume notification.
+**In:** taps/hour, minimum gap, selectable reminder haptic, start/stop/resume, a
+shareable log of scheduled and fired timestamps ("Send log", ships in Release),
+60-second debug mode (Debug only), resume notification.
 
 **Out (by decision):**
 
