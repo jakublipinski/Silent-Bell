@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Silent Bell</title>
+<meta name="robots" content="noindex">
+<!-- Counted entry point for visitors arriving from the App Store listing
+     (the Marketing URL there points at silentbell.app/as). Registers one
+     pageview for /as, then continues to the home page. The fetch uses
+     keepalive so the count survives the immediate navigation; without
+     JavaScript the meta refresh still forwards, uncounted. -->
+<script>
+  fetch('https://silentbell.goatcounter.com/count?p=%2Fas'
+        + '&r=' + encodeURIComponent(document.referrer),
+        {keepalive: true}).catch(function () {});
+  location.replace('/');
+</script>
+<noscript><meta http-equiv="refresh" content="0; url=/"></noscript>
+</head>
+<body style="background:#000;color:#B8B2A6;font-family:-apple-system,sans-serif;text-align:center;padding-top:20vh">
+<p><a href="/" style="color:#CFA86F">Continue to silentbell.app</a></p>
+</body>
+</html>
