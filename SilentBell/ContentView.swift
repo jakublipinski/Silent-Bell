@@ -13,10 +13,18 @@ struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
 
     private var config: ScheduleConfig {
-        ScheduleConfig(
+        // The 60-second hour is a Debug-only control, so Release must ignore the
+        // stored flag rather than trust it: a device that ran a Debug build could
+        // otherwise carry it into Release, where nothing can switch it back off.
+        #if DEBUG
+        let fastHour = debugFastHour
+        #else
+        let fastHour = false
+        #endif
+        return ScheduleConfig(
             tapsPerHour: tapsPerHour,
             minGap: TimeInterval(minGapMinutes * 60),
-            debugFastHour: debugFastHour
+            debugFastHour: fastHour
         )
     }
 
@@ -180,17 +188,17 @@ struct ContentView: View {
             }
             .buttonStyle(.plain)
 
-            // Debug builds only. An App Store archive is Release, so a reviewer
-            // never sees the event log or the test buttons — which would read as an
-            // unfinished app — while `./run.sh` (Debug) keeps them for diagnostics.
-            #if DEBUG
+            // Ships in Release too: a customer reporting a problem has no other way
+            // to get diagnostics off the wrist, and nothing here is collected — the
+            // log stays on the device until they choose to share it. The debug-only
+            // controls inside are still compiled out, so a reviewer sees a support
+            // feature rather than an unfinished app.
             NavigationLink {
                 DeveloperView(session: session, logStore: session.logStore, debugFastHour: $debugFastHour)
             } label: {
-                SettingRow(label: "Log", showChevron: true)
+                SettingRow(label: "Send log", showChevron: true)
             }
             .buttonStyle(.plain)
-            #endif
         }
         .padding(.top, 11)
     }
@@ -258,6 +266,10 @@ struct DeveloperView: View {
                 }
                 .buttonStyle(.plain)
 
+                // Development affordances only. The 60-second hour would make a
+                // shipping app look broken, and the test buttons would read as
+                // unfinished — both compiled out of the App Store build.
+                #if DEBUG
                 Button { debugFastHour.toggle() } label: {
                     SettingRow(label: "60-sec hour",
                                value: debugFastHour ? "On" : "Off",
@@ -274,6 +286,7 @@ struct DeveloperView: View {
                     SettingRow(label: "Test resume (silent)")
                 }
                 .buttonStyle(.plain)
+                #endif
 
                 Button(role: .destructive) { logStore.clear() } label: {
                     SettingRow(label: "Clear log")

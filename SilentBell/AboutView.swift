@@ -21,8 +21,8 @@ struct AboutBody: View {
                 .frame(maxWidth: .infinity, alignment: .center)
 
             para("Random taps on your wrist — a prompt to notice where your "
-               + "attention is. Predictable reminders stop working; unpredictable "
-               + "ones don't.")
+               + "attention is. Predictable reminders are ignored over time; "
+               + "unpredictable ones aren't.")
 
             para("No sound, nothing on screen. Only you feel it, even in Do Not "
                + "Disturb.")
