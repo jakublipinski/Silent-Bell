@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lessons from shipping a watch-only app — Silent Bell</title>
+<meta name="description" content="Three things that cost more than the code when shipping a standalone Apple Watch app: the iOS container nobody mentions, three rejections for one icon, and no App Store analytics at all.">
+<link rel="canonical" href="https://silentbell.app/lessons.html">
+
+<!-- Social preview -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://silentbell.app/lessons.html">
+<meta property="og:title" content="Lessons from shipping a watch-only app, built with Claude">
+<meta property="og:description" content="The iOS container nobody mentions, three rejections for one icon, and no App Store analytics at all.">
+<meta property="og:image" content="https://silentbell.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="fonts/newsreader.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="wrap" style="margin:0 auto;padding:28px clamp(20px,5vw,48px);display:flex;align-items:center;gap:10px">
+  <a href="/" style="display:flex;align-items:center;gap:10px">
+    <svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true">
+      <circle cx="32" cy="32" r="7" fill="#CFA86F"></circle>
+      <circle cx="32" cy="32" r="19" fill="none" stroke="#CFA86F" stroke-opacity="0.5" stroke-width="4"></circle>
+      <circle cx="32" cy="32" r="30" fill="none" stroke="#CFA86F" stroke-opacity="0.2" stroke-width="3"></circle>
+    </svg>
+    <span style="font-size:14px;font-weight:600;letter-spacing:.12em;color:#E8E2D8">SILENT BELL</span>
+  </a>
+</header>
+
+<main class="prose">
+  <h1 class="serif">Lessons from shipping a watch-only app</h1>
+
+  <p class="lede">Three things cost more than the app itself, and none of them were code.</p>
+
+  <p>I shipped <a href="/">Silent Bell</a> last week: a standalone Apple Watch app that taps your wrist at random moments. No sound, nothing on screen. Five dollars once, no account, no network code at all. It is open source under Apache&nbsp;2.0 — <a href="https://github.com/jakublipinski/Silent-Bell">the whole thing is on GitHub</a>, including the parts that failed. I built it over evenings with Claude Code.</p>
+
+  <p>The taps were the easy part. These were not.</p>
+
+  <h2>1. A watch-only app is not watch-only at delivery</h2>
+
+  <p>A single watchOS target builds, signs, installs and runs perfectly on a real Watch. Everything looks finished. Then on release day, Xcode's <em>Distribute App</em> offers Release Testing, Enterprise and Debugging — no App Store option, and no explanation of its absence. Running <code>xcodebuild&nbsp;-exportArchive</code> says the same thing through an error that names an empty set of choices.</p>
+
+  <p>The App Store has no watchOS platform. What actually ships is an <strong>iOS container app</strong> with the watch app embedded inside it, which is also why a watch-only app's App Store Connect record is created under iOS. The container holds the App ID, gets archived, gets reviewed, and never runs. It contains no code.</p>
+
+  <p>Nothing warns you about this. I spent hours eliminating plausible causes — the distribution certificate, the provisioning profile, the archive, the account type, <span style="white-space:nowrap">command line versus IDE</span> — and every one was a dead end. What settled it was creating a throwaway project from Xcode's own watchOS App template and finding that it produced <em>two</em> targets. Three minutes, after hours of theorising.</p>
+
+  <p>If you are ever stuck like this: build the template and diff it.</p>
+
+  <h2>2. Three rejections, one icon</h2>
+
+  <p>Rejected twice under guideline 2.3.8 for having "placeholder icons", then a third time under guideline 4. It was not a placeholder. It was a real icon that happened to be dark on near-black.</p>
+
+  <p>watchOS masks every icon into a circle and shows it on a black honeycomb, so a dark icon's boundary simply disappears. Apple's <a href="https://developer.apple.com/design/human-interface-guidelines/app-icons">Human Interface Guidelines</a> say it plainly: avoid using black for an icon's background, and lighten a black background so the icon does not blend into the display behind it.</p>
+
+  <p>My first attempt lightened the background to <code>#1C1C1E</code> — the right diagnosis at roughly a tenth of the necessary dose. The fix that passed was a sand field, <code>#CFA86F</code>, which also survives the App Store's white product pages.</p>
+
+  <p>The actual lesson is not about colour. Twice I read a rejection, formed a theory, and resubmitted a guess. What finally worked was replying to App Review and asking <em>which surface</em> showed the problem. A month, for a background colour.</p>
+
+  <h2>3. There are no App Store analytics for watch-only apps</h2>
+
+  <p>Open App Analytics for a standalone watchOS app and you are told the app is unavailable for analytics, and that you should contact your App Store Connect user with the admin role. That message is misleading. It is not a permissions problem and no admin can fix it.</p>
+
+  <p>Apple's response to a developer feedback report was direct: analytics does not include data from watchOS. Intended behaviour. The enhancement request asking for it, <a href="https://openradar.appspot.com/FB22636118">FB22636118</a>, was filed in April 2026 and is still open; there is a <a href="https://developer.apple.com/forums/thread/820519">developer forum thread</a> covering the same ground.</p>
+
+  <p>So: no acquisition data, no retention, no crash reporting, and no campaign attribution — the tagged-link mechanism every guide to App Store marketing assumes lives in the analytics section you cannot open. Sales and Trends still works, because it is a financial pipeline rather than a device one, so you can see units sold but never where the buyer came from.</p>
+
+  <p>If you ship watch-only, your own website is the only measuring instrument you have. Plan for that before launch, not after.</p>
+
+  <h2>On building it with Claude</h2>
+
+  <p>It was confidently wrong about plenty. That turned out to be affordable, because every answer was tested on a real Watch the same evening and the wrong ones cost minutes.</p>
+
+  <p>The question that mattered most — which kind of extended runtime session keeps running after you press the Digital Crown — was not settled by documentation at all. It was settled by trying four of them on my wrist and watching three die. The model was a fast way to generate candidates and a poor authority on which one was true.</p>
+
+  <p>All of it, failures included, is written up in the <a href="https://github.com/jakublipinski/Silent-Bell">README</a>.</p>
+
+  <p class="meta">2 September 2026 · <a href="/" style="color:#6b6558">Silent Bell</a> · <a href="https://github.com/jakublipinski/Silent-Bell" style="color:#6b6558">source</a></p>
+</main>
+
+<!-- GoatCounter: aggregate visit counts, no cookies, no personal data. The
+     script is self-hosted like the fonts, so the only request to a third
+     party is the count itself. See privacy.html. -->
+<script data-goatcounter="https://silentbell.goatcounter.com/count"
+        async src="/count.js"></script>
+</body>
+</html>
