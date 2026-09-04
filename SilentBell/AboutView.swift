@@ -20,29 +20,27 @@ struct AboutBody: View {
                 .foregroundStyle(Design.accent)
                 .frame(maxWidth: .infinity, alignment: .center)
 
-            para("Random taps on your wrist — a prompt to notice where your "
-               + "attention is. Predictable reminders are ignored over time; "
-               + "unpredictable ones aren't.")
+            // Each of these is a single literal, not a concatenation:
+            // LocalizedStringKey is a lookup key, and "a" + "b" would build a
+            // key that exists in no catalog.
+            para("Random taps on your wrist — a prompt to notice where your attention is. Predictable reminders are ignored over time; unpredictable ones aren't.")
 
-            para("No sound, nothing on screen. Only you feel it, even in Do Not "
-               + "Disturb.")
+            para("No sound, nothing on screen. Only you feel it, even in Do Not Disturb.")
 
             heading("Sessions last one hour")
-            para("Apple caps background running, so Silent Bell pauses when the "
-               + "hour is up. You'll feel a descending pattern. Tap Resume to "
-               + "carry on.")
+            para("Apple caps background running, so Silent Bell pauses when the hour is up. You'll feel a descending pattern. Tap Resume to carry on.")
         }
         .padding(.horizontal, 4)
     }
 
-    private func para(_ s: String) -> some View {
+    private func para(_ s: LocalizedStringKey) -> some View {
         Text(s)
             .font(.system(size: 13))
             .foregroundStyle(Design.activeDetail)
             .fixedSize(horizontal: false, vertical: true)
     }
 
-    private func heading(_ s: String) -> some View {
+    private func heading(_ s: LocalizedStringKey) -> some View {
         Text(s)
             .font(.system(size: 13, weight: .semibold))
             .foregroundStyle(.white)
@@ -103,6 +101,6 @@ struct AboutView: View {
         let info = Bundle.main.infoDictionary
         let short = info?["CFBundleShortVersionString"] as? String ?? "—"
         let build = info?["CFBundleVersion"] as? String ?? "—"
-        return "Version \(short) (\(build))"
+        return String(localized: "Version \(short) (\(build))")
     }
 }

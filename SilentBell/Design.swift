@@ -79,7 +79,7 @@ struct RippleMark: View {
 
 /// Full-width pill: the single primary action on each screen.
 struct PillButton: View {
-    let title: String
+    let title: LocalizedStringKey
     let background: Color
     let foreground: Color
     let action: () -> Void
@@ -99,7 +99,7 @@ struct PillButton: View {
 
 /// One rounded settings row: label left, value / chevron / checkmark right.
 struct SettingRow: View {
-    let label: String
+    let label: LocalizedStringKey
     var value: String? = nil
     var showChevron = false
     var checked = false
@@ -138,7 +138,7 @@ struct SettingRow: View {
 
 /// A list of values rendered in the same row language as the rest of the app.
 struct OptionPicker: View {
-    let title: String
+    let title: LocalizedStringKey
     let options: [Int]
     let format: (Int) -> String
     @Binding var selection: Int
@@ -148,7 +148,12 @@ struct OptionPicker: View {
             VStack(spacing: 5) {
                 ForEach(options, id: \.self) { option in
                     Button { selection = option } label: {
-                        SettingRow(label: format(option), checked: option == selection)
+                        // `format` already returns display-ready text ("5 min",
+                        // localized at the call site), so this is a key with no
+                        // catalog entry — LocalizedStringKey then renders it verbatim,
+                        // which is exactly what we want.
+                        SettingRow(label: LocalizedStringKey(format(option)),
+                                   checked: option == selection)
                     }
                     .buttonStyle(.plain)
                 }

@@ -109,7 +109,7 @@ struct ContentView: View {
         }
     }
 
-    private var stateWord: String {
+    private var stateWord: LocalizedStringKey {
         switch session.phase {
         case .stopped: return "Stopped"
         case .starting: return "Starting"
@@ -165,10 +165,10 @@ struct ContentView: View {
             NavigationLink {
                 OptionPicker(title: "Min. gap",
                              options: Array(1...15),
-                             format: { "\($0) min" },
+                             format: { String(localized: "\($0) min") },
                              selection: $minGapMinutes)
             } label: {
-                SettingRow(label: "Min. gap", value: "\(minGapMinutes) min")
+                SettingRow(label: "Min. gap", value: String(localized: "\(minGapMinutes) min"))
             }
             .buttonStyle(.plain)
 
@@ -176,7 +176,7 @@ struct ContentView: View {
                 ReminderTapView(selectedRaw: $reminderHapticRaw)
             } label: {
                 SettingRow(label: "Tap",
-                           value: hapticName(reminderHapticRaw),
+                           value: localizedHapticName(reminderHapticRaw),
                            showChevron: true)
             }
             .buttonStyle(.plain)
@@ -224,6 +224,14 @@ func hapticName(_ raw: Int) -> String {
     hapticChoices.first { $0.1.rawValue == raw }?.0 ?? "—"
 }
 
+/// The same name run through the string catalog, for display. `hapticName`
+/// stays untranslated because it doubles as the catalog key.
+func localizedHapticName(_ raw: Int) -> String {
+    let key = hapticName(raw)
+    guard key != "—" else { return key }
+    return String(localized: String.LocalizationValue(key))
+}
+
 /// Pick the reminder tap. Tapping a row **plays it immediately** and selects it;
 /// the selection is what actually fires on every reminder.
 struct ReminderTapView: View {
@@ -237,7 +245,7 @@ struct ReminderTapView: View {
                         selectedRaw = type.rawValue
                         WKInterfaceDevice.current().play(type)
                     } label: {
-                        SettingRow(label: name, checked: type.rawValue == selectedRaw)
+                        SettingRow(label: LocalizedStringKey(name), checked: type.rawValue == selectedRaw)
                     }
                     .buttonStyle(.plain)
                 }

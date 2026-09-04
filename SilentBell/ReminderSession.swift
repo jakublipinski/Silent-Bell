@@ -187,8 +187,8 @@ final class ReminderSession: NSObject, ObservableObject, WKExtendedRuntimeSessio
     /// screen still posts a passive one, kept so the two can be compared on-device.
     private func scheduleResumeNotification(fireAt date: Date?, passive: Bool) {
         let content = UNMutableNotificationContent()
-        content.title = "Silent Bell paused"
-        content.body = "Tap Resume to start a new session."
+        content.title = String(localized: "Silent Bell paused")
+        content.body = String(localized: "Tap Resume to start a new session.")
         content.sound = nil             // never any sound
         content.categoryIdentifier = resumeCategory
         content.interruptionLevel = passive ? .passive : .active
