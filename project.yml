@@ -56,8 +56,8 @@ targets:
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_CFBundleDisplayName: Silent Bell
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
-        CURRENT_PROJECT_VERSION: "4"
-        MARKETING_VERSION: "1.0.1"
+        CURRENT_PROJECT_VERSION: "5"
+        MARKETING_VERSION: "1.0.2"
         CODE_SIGN_STYLE: Automatic
         # The container is what gets archived, so it must not skip install —
         # otherwise the .xcarchive has an empty Products directory and offers
@@ -101,8 +101,8 @@ targets:
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         CODE_SIGN_STYLE: Automatic
         GENERATE_INFOPLIST_FILE: NO
-        CURRENT_PROJECT_VERSION: "4"
-        MARKETING_VERSION: "1.0.1"
+        CURRENT_PROJECT_VERSION: "5"
+        MARKETING_VERSION: "1.0.2"
         TARGETED_DEVICE_FAMILY: "4"
         # Embedded in the container rather than installed in its own right.
         SKIP_INSTALL: YES
