@@ -27,3 +27,5 @@ SilentBell/Info.plist
 
 # Distribution profile downloaded from the developer portal — not shared.
 *.mobileprovision
+screenshots/
+build-sim-release/
