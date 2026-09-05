@@ -29,3 +29,4 @@ SilentBell/Info.plist
 *.mobileprovision
 screenshots/
 build-sim-release/
+.build-tools/
