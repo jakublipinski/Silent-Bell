@@ -66,6 +66,9 @@ struct RippleMark: View {
             }
         }
         .frame(width: 36, height: 36)
+        // Pure decoration. The state this encodes is already spoken by the
+        // state word directly beneath it, so a label here would say it twice.
+        .accessibilityHidden(true)
     }
 
     private func ring(_ d: CGFloat, _ c: Color, _ w: CGFloat) -> some View {
@@ -123,16 +126,24 @@ struct SettingRow: View {
                 Image(systemName: "checkmark")
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundStyle(Design.accent)
+                    .accessibilityHidden(true)   // meaning carried by .isSelected below
             }
             if showChevron {
                 Image(systemName: "chevron.forward")
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundStyle(Design.chevron)
+                    .accessibilityHidden(true)   // "chevron forward" on every row is noise
             }
         }
         .padding(.horizontal, 13)
         .frame(height: 42)
         .background(Design.rowBg, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+        // Read as one item ("Taps per hour, 4") instead of three separate swipes.
+        .accessibilityElement(children: .combine)
+        // Carries what the checkmark means. VoiceOver speaks "selected" in the
+        // user's own language, so unlike a hand-written label this needs no
+        // string in the catalog and no translation.
+        .accessibilityAddTraits(checked ? [.isSelected] : [])
     }
 }
 
