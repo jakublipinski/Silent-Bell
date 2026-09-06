@@ -85,7 +85,7 @@ The source code is public and auditable at github.com/jakublipinski/Silent-Bell 
 **What's New — 1.0.3**
 
 ```
-• Better VoiceOver support: each setting is read as a single item, the selected tap type is announced as selected, and decorative details are no longer spoken.
+• Accessibility: VoiceOver support.
 ```
 
 ---
@@ -147,7 +147,7 @@ Der Quellcode ist öffentlich und überprüfbar auf github.com/jakublipinski/Sil
 **What's New — 1.0.3**
 
 ```
-• Bessere VoiceOver-Unterstützung: Jede Einstellung wird als ein Element vorgelesen, die gewählte Impulsart wird als „ausgewählt“ angesagt, und dekorative Details werden nicht mehr vorgelesen.
+• Bedienungshilfen: Unterstützung für VoiceOver.
 ```
 
 ---
@@ -209,7 +209,7 @@ watchOS 10 以降の Apple Watch。インストールする iPhone アプリは�
 **What's New — 1.0.3**
 
 ```
-• VoiceOver への対応を改善しました。各設定がひとつの項目として読み上げられ、選択中の振動の種類が「選択済み」と案内され、装飾的な要素は読み上げられなくなりました。
+• アクセシビリティ：VoiceOver に対応しました。
 ```
 
 ---
@@ -271,7 +271,7 @@ Le code source est public et vérifiable sur github.com/jakublipinski/Silent-Bel
 **What's New — 1.0.3**
 
 ```
-• Meilleure prise en charge de VoiceOver : chaque réglage est lu comme un seul élément, le type d’impulsion choisi est annoncé comme sélectionné, et les éléments décoratifs ne sont plus énoncés.
+• Accessibilité : prise en charge de VoiceOver.
 ```
 
 ---
@@ -333,7 +333,7 @@ El código fuente es público y auditable en github.com/jakublipinski/Silent-Bel
 **What's New — 1.0.3**
 
 ```
-• Mejor compatibilidad con VoiceOver: cada ajuste se lee como un solo elemento, el tipo de toque elegido se anuncia como seleccionado y los elementos decorativos ya no se leen.
+• Accesibilidad: compatibilidad con VoiceOver.
 ```
 
 ---
