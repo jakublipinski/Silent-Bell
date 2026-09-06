@@ -82,10 +82,10 @@ Apple Watch with watchOS 10 or later. There is no iPhone app to install.
 The source code is public and auditable at github.com/jakublipinski/Silent-Bell — every line the app runs, readable by anyone.
 ```
 
-**What's New — 1.0.2**
+**What's New — 1.0.3**
 
 ```
-• Silent Bell now speaks German, Japanese, French and Spanish.
+• Better VoiceOver support: each setting is read as a single item, the selected tap type is announced as selected, and decorative details are no longer spoken.
 ```
 
 ---
@@ -144,10 +144,10 @@ Apple Watch mit watchOS 10 oder neuer. Es gibt keine iPhone-App zu installieren.
 Der Quellcode ist öffentlich und überprüfbar auf github.com/jakublipinski/Silent-Bell – jede Zeile, die die App ausführt, für jeden lesbar.
 ```
 
-**What's New — 1.0.2**
+**What's New — 1.0.3**
 
 ```
-• Silent Bell spricht jetzt Deutsch, Japanisch, Französisch und Spanisch.
+• Bessere VoiceOver-Unterstützung: Jede Einstellung wird als ein Element vorgelesen, die gewählte Impulsart wird als „ausgewählt“ angesagt, und dekorative Details werden nicht mehr vorgelesen.
 ```
 
 ---
@@ -206,10 +206,10 @@ watchOS 10 以降の Apple Watch。インストールする iPhone アプリは�
 ソースコードは github.com/jakublipinski/Silent-Bell で公開・検証可能です。アプリが実行するすべての行を、誰でも読むことができます。
 ```
 
-**What's New — 1.0.2**
+**What's New — 1.0.3**
 
 ```
-• 日本語、ドイツ語、フランス語、スペイン語に対応しました。
+• VoiceOver への対応を改善しました。各設定がひとつの項目として読み上げられ、選択中の振動の種類が「選択済み」と案内され、装飾的な要素は読み上げられなくなりました。
 ```
 
 ---
@@ -268,10 +268,10 @@ Apple Watch avec watchOS 10 ou version ultérieure. Aucune application iPhone à
 Le code source est public et vérifiable sur github.com/jakublipinski/Silent-Bell — chaque ligne exécutée par l’application, lisible par tous.
 ```
 
-**What's New — 1.0.2**
+**What's New — 1.0.3**
 
 ```
-• Silent Bell parle désormais français, allemand, japonais et espagnol.
+• Meilleure prise en charge de VoiceOver : chaque réglage est lu comme un seul élément, le type d’impulsion choisi est annoncé comme sélectionné, et les éléments décoratifs ne sont plus énoncés.
 ```
 
 ---
@@ -330,10 +330,10 @@ Apple Watch con watchOS 10 o posterior. No hay ninguna app de iPhone que instala
 El código fuente es público y auditable en github.com/jakublipinski/Silent-Bell: cada línea que ejecuta la app, legible por cualquiera.
 ```
 
-**What's New — 1.0.2**
+**What's New — 1.0.3**
 
 ```
-• Silent Bell ya habla español, alemán, japonés y francés.
+• Mejor compatibilidad con VoiceOver: cada ajuste se lee como un solo elemento, el tipo de toque elegido se anuncia como seleccionado y los elementos decorativos ya no se leen.
 ```
 
 ---
