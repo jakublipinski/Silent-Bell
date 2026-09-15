@@ -36,6 +36,111 @@
         }
       }
     },
+    "1× Tick": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1× Tick"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1× Tick"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1× Tic"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1× Tic"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カチッ×1"
+          }
+        }
+      }
+    },
+    "2× Tick": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2× Tick"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2× Tick"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2× Tic"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2× Tic"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カチッ×2"
+          }
+        }
+      }
+    },
+    "3× Tick": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3× Tick"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3× Tick"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3× Tic"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3× Tic"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カチッ×3"
+          }
+        }
+      }
+    },
     "About": {
       "extractionState": "manual",
       "localizations": {
@@ -207,6 +312,41 @@
           "stringUnit": {
             "state": "translated",
             "value": "ダブル"
+          }
+        }
+      }
+    },
+    "Double tick": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doppel-Tick"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Double tick"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doble tic"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Double tic"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カチカチ"
           }
         }
       }
@@ -561,37 +701,37 @@
         }
       }
     },
-    "No sound, nothing on screen. Only you feel it, even in Do Not Disturb.": {
+    "Nothing on screen. Only you feel it, even in Do Not Disturb.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kein Ton, nichts auf dem Display. Nur du spürst es – auch bei „Nicht stören“."
+            "value": "Nichts auf dem Display. Nur du spürst es – auch bei „Nicht stören“."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "No sound, nothing on screen. Only you feel it, even in Do Not Disturb."
+            "value": "Nothing on screen. Only you feel it, even in Do Not Disturb."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sin sonido y sin nada en pantalla. Solo tú lo sientes, incluso en modo No molestar."
+            "value": "Nada en pantalla. Solo tú lo sientes, incluso en modo No molestar."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aucun son, rien à l’écran. Personne d’autre ne le sent, même en mode Ne pas déranger."
+            "value": "Rien à l’écran. Personne d’autre ne le sent, même en mode Ne pas déranger."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "音もなく、画面にも何も表示されません。おやすみモード中でも、感じるのはあなただけです。"
+            "value": "画面には何も表示されません。おやすみモード中でも、感じるのはあなただけです。"
           }
         }
       }
@@ -911,6 +1051,41 @@
         }
       }
     },
+    "Silent": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lautlos"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Silent"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Silencioso"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Silencieux"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無音"
+          }
+        }
+      }
+    },
     "Silent Bell paused": {
       "extractionState": "manual",
       "localizations": {
@@ -1191,6 +1366,41 @@
         }
       }
     },
+    "Taps marked %@ are always silent. The others are silent only in Silent Mode.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mit %@ markierte Impulse sind immer lautlos. Die anderen sind es nur im Stummmodus."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taps marked %@ are always silent. The others are silent only in Silent Mode."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los toques marcados con %@ siempre son silenciosos. Los demás solo lo son en modo silencio."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les impulsions marquées %@ sont toujours silencieuses. Les autres ne le sont qu’en mode Silence."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ の付いた振動は常に無音です。そのほかの振動は、消音モードのときだけ無音になります。"
+          }
+        }
+      }
+    },
     "Taps per hour": {
       "extractionState": "manual",
       "localizations": {
@@ -1257,6 +1467,41 @@
           "stringUnit": {
             "state": "translated",
             "value": "カチッ"
+          }
+        }
+      }
+    },
+    "Triple tick": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dreifach-Tick"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Triple tick"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Triple tic"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Triple tic"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カチカチカチ"
           }
         }
       }

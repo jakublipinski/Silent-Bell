@@ -25,7 +25,13 @@ struct AboutBody: View {
             // key that exists in no catalog.
             para("Random taps on your wrist — a prompt to notice where your attention is. Predictable reminders are ignored over time; unpredictable ones aren't.")
 
-            para("No sound, nothing on screen. Only you feel it, even in Do Not Disturb.")
+            para("Nothing on screen. Only you feel it, even in Do Not Disturb.")
+
+            // The same grey icon the Tap Type list shows. VoiceOver gets the same
+            // sentence with the word "Silent" in its place; an Image and a Text
+            // interpolation both become %@, so it is one catalog key, not two.
+            para("Taps marked \(Image(systemName: "bell.slash")) are always silent. The others are silent only in Silent Mode.")
+                .accessibilityLabel(Text("Taps marked \(Text("Silent")) are always silent. The others are silent only in Silent Mode."))
 
             heading("Sessions last one hour")
             para("Apple caps background running, so Silent Bell pauses when the hour is up. You'll feel a descending pattern. Tap Resume to carry on.")

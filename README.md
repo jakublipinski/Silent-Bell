@@ -1,8 +1,8 @@
 # Silent Bell
 
-**A mindfulness bell that never makes a sound.** A standalone Apple Watch app that
+**A mindfulness bell you feel rather than hear.** A standalone Apple Watch app that
 taps your wrist at random moments — a quiet prompt to notice where your attention
-is. No sound, no notification on the watch face, nothing anyone else can see.
+is. Silent by default, no notification on the watch face, nothing anyone else can see.
 
 **[Download on the App Store](https://apps.apple.com/app/id6795404742)** · [silentbell.app](https://silentbell.app) · [Privacy](https://silentbell.app/privacy.html) · [Support](https://silentbell.app/support.html)
 
@@ -18,7 +18,7 @@ documentation.
 
 ## What it is
 
-A standalone watchOS app: a mindfulness bell that never makes a sound. It taps the
+A standalone watchOS app: a mindfulness bell that is silent by default. It taps the
 wrist at **random moments, X times per hour**, as a recurring prompt to bring
 attention back to the present.
 
@@ -38,7 +38,12 @@ Built and verified on an Apple Watch Series 7. The bundle identifier is
    *meta-event* when a session ends — never as a reminder tap (see "Session
    lifecycle & resume"). This knowingly reverses the original "no
    `UNUserNotification` of any kind" rule, accepting the Focus caveat noted there.
-2. **No sound** — haptic only (the resume notification is haptic-only too, `sound = nil`).
+2. **Silent by default** — haptic only, and the default tap is silent whatever the
+   Watch's Silent Mode setting. watchOS plays a system sound with every built-in
+   haptic except `.click` whenever Silent Mode is off, so only taps built from
+   `.click` are silent unconditionally; the picker marks them 🔕. The resume
+   notification is always silent (`sound = nil`). The hourly pause alert, like a
+   notification, sounds unless Silent Mode is on — by decision (see "Haptics").
 3. **No screen wake required** — taps land with the wrist down and display off.
 4. **Focus-mode independent** — the reminder taps are haptics from an active
    session, so Focus never silences them. (The resume *notification* is the one
@@ -223,27 +228,52 @@ and cheap without polling:
 
 ## Haptics
 
-`WKInterfaceDevice.current().play(_:)` with `WKHapticType` (the nine built-ins
-are the whole palette; Core Haptics custom patterns aren't available on watchOS).
-Four signals, defined in `Haptics.swift`, kept distinct so they're never
-confusable:
+`WKInterfaceDevice.current().play(_:)` with `WKHapticType`. The nine built-ins
+are the whole palette: Core Haptics is not in the watchOS SDK at all.
 
-- **Reminder tap** — a single built-in, **user-selectable at runtime** via the
-  "Tap" picker (tapping a row plays it live and selects it). Default
-  **`.start`**, shown as *Gentle* (`.click` was tried and felt too subtle;
-  `.notification` felt like a real system alert). Stored in `@AppStorage` under
-  `Haptics.reminderKey` and read live at fire time, so changing it needs no rebuild.
-- **Started** — ascending two-part confirmation (`.start` → `.directionUp`).
-- **Stopped** — descending two-part confirmation (`.directionDown` → `.stop`).
-  Deliberately *shorter* than the paused alert, so a stop the user chose never
-  feels like a session that ended on its own.
+**Every built-in haptic except `.click` plays a system sound whenever the
+Watch's Silent Mode is off.** Apple's documentation does not say so anywhere
+(not the `WKHapticType` pages, not `play(_:)`, not the HIG on haptics). It was
+found through a user report, issue #1: weeks of testing had all been done with
+Silent Mode on, the one setting in which it cannot show. It was confirmed by
+toggling Silent Mode on the wrist. No public API reports Silent Mode — neither
+the SDK nor `devicectl` — so the app cannot detect the setting and adapt. The
+only silent primitive is `.click`, which is why the default tap is built from
+it.
+
+Three signals, defined in `Haptics.swift`:
+
+- **Reminder tap** — **user-selectable at runtime** via the "Tap" picker
+  (tapping a row plays it and selects it). Default **Double tick**: two
+  `.click`s 0.2 s apart (`Haptics.tickSpacing`). A single `.click` was once
+  rejected as too subtle, which is how a sounding type became the default;
+  repeating it is the silent answer to that. Stored in `@AppStorage` under
+  `Haptics.reminderKey` and read live at fire time. The default lives in one
+  constant, `Haptics.defaultTapID`, because `@AppStorage` never writes its
+  default: the picker's default and the fallback that actually plays must be
+  the same value, or the row would name one tap while another played.
+- **Started / Stopped** — both play the chosen tap, so Start doubles as a
+  preview of every reminder, and both are silent whenever that tap is.
 - **Paused** — descending three-part alert (`.directionDown` → `.stop` →
-  `.failure`). Played at `willExpire` as the Focus-proof resume cue.
+  `.failure`), played at `willExpire` as the Focus-proof resume cue.
+  Deliberately not the chosen tap: it marks the end of the session rather than
+  a reminder, so it keeps a pattern of its own and, like a notification, sounds
+  unless Silent Mode is on.
 
-The picker names haptics for how they feel, not for the API constant:
-Gentle→`start`, Tick→`click`, Knock→`notification`, Double→`success`,
-Rise→`directionUp`, Fall→`directionDown`, Firm→`stop`, Heavy→`failure`,
-Echo→`retry`.
+The picker lists eleven taps. First the three silent ones, marked with a grey
+`bell.slash` that VoiceOver reads as "Silent": Tick (one `.click`), Double tick
+(two), Triple tick (three). Then the other built-ins, named for how they feel:
+Gentle→`start`, Knock→`notification`, Double→`success`, Rise→`directionUp`,
+Fall→`directionDown`, Firm→`stop`, Heavy→`failure`, Echo→`retry`. Whether a
+tap is silent is worked out from its haptics (all `.click`), never declared,
+so a new tap cannot be mislabelled.
+
+A single built-in type is stored as its own `WKHapticType.rawValue`, so every
+choice saved by an earlier version still resolves; the multi-tick patterns use
+ids outside that enum's range. On narrow watches the three tick names switch
+*together* to "1× / 2× / 3× Tick" when the full names don't fit (SwiftUI's
+`ViewThatFits`), and every tick row reserves room for the checkmark, so moving
+the selection cannot flip them between long and short.
 
 ## Configuration & defaults
 
@@ -253,7 +283,7 @@ All settings are in-app (shown only when a session is not running), persisted wi
 |---|---|---|
 | Taps per hour | **4** | 1–10 |
 | Min. gap | **5 minutes** | 1–15 min |
-| Tap | **Gentle** (`.start`) | any of the 9 built-ins |
+| Tap | **Double tick** (two `.click`s) | 11: three silent ticks, eight built-ins |
 | Debug 60-second hour | off | toggle (Debug builds only) |
 
 Two properties worth knowing:

@@ -104,28 +104,63 @@ struct PillButton: View {
 struct SettingRow: View {
     let label: LocalizedStringKey
     var value: String? = nil
+    /// Shown instead of `value` when the row would not fit on one line with it.
+    var shortValue: String? = nil
     var showChevron = false
     var checked = false
+    /// Marks a tap that stays silent even with the Watch's Silent Mode off.
+    var silent = false
+    /// What VoiceOver says for the label when the visible one is a short form.
+    /// VoiceOver has no width limit, so it always gets the full name.
+    var spokenLabel: LocalizedStringKey? = nil
+    /// Keeps the checkmark's space even when unchecked, so the row's width
+    /// doesn't depend on which row is selected.
+    var reserveCheck = false
 
     var body: some View {
+        if let shortValue {
+            // Measures the whole row at full text size and falls back to the
+            // short value only when the full one would not fit.
+            ViewThatFits(in: .horizontal) {
+                row(showing: value)
+                row(showing: shortValue)
+            }
+        } else {
+            row(showing: value)
+        }
+    }
+
+    private func row(showing shown: String?) -> some View {
         HStack(spacing: 6) {
             Text(label)
                 .font(.system(size: 14.5))
                 .foregroundStyle(.white)
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)    // shrink rather than truncate on 41mm
+                .accessibilityLabel(Text(spokenLabel ?? label))
+            if silent {
+                // Grey, not sand: sand already means "selected" in these rows.
+                // Labelled rather than hidden, because VoiceOver users are the
+                // ones for whom a tap's silence matters most.
+                Image(systemName: "bell.slash")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(Design.rowValue)
+                    .accessibilityLabel(Text("Silent"))
+            }
             Spacer(minLength: 4)
-            if let value {
-                Text(value)
+            if let shown {
+                Text(shown)
                     .font(.system(size: 14.5))
                     .foregroundStyle(Design.rowValue)
                     .lineLimit(1)
                     .minimumScaleFactor(0.8)
+                    .accessibilityLabel(Text(value ?? shown))   // full name, even when shortened
             }
-            if checked {
+            if checked || reserveCheck {
                 Image(systemName: "checkmark")
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundStyle(Design.accent)
+                    .opacity(checked ? 1 : 0)
                     .accessibilityHidden(true)   // meaning carried by .isSelected below
             }
             if showChevron {

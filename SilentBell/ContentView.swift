@@ -7,7 +7,7 @@ struct ContentView: View {
     @AppStorage("tapsPerHour") private var tapsPerHour = 4
     @AppStorage("minGapMinutes") private var minGapMinutes = 10
     @AppStorage("debugFastHour") private var debugFastHour = false
-    @AppStorage(Haptics.reminderKey) private var reminderHapticRaw = WKHapticType.start.rawValue
+    @AppStorage(Haptics.reminderKey) private var reminderHapticRaw = Haptics.defaultTapID
     @AppStorage("hasSeenIntro") private var hasSeenIntro = false
 
     @Environment(\.scenePhase) private var scenePhase
@@ -177,6 +177,7 @@ struct ContentView: View {
             } label: {
                 SettingRow(label: "Tap",
                            value: localizedHapticName(reminderHapticRaw),
+                           shortValue: localizedShortHapticName(reminderHapticRaw),
                            showChevron: true)
             }
             .buttonStyle(.plain)
@@ -205,23 +206,10 @@ struct ContentView: View {
 }
 
 /// Bumped each deploy so we can confirm the Watch is running a fresh build.
-let buildTag = "battery-1"
-
-/// The reminder haptics, named for how they feel rather than for the API constant.
-let hapticChoices: [(String, WKHapticType)] = [
-    ("Gentle", .start),
-    ("Tick", .click),
-    ("Knock", .notification),
-    ("Double", .success),
-    ("Rise", .directionUp),
-    ("Fall", .directionDown),
-    ("Firm", .stop),
-    ("Heavy", .failure),
-    ("Echo", .retry),
-]
+let buildTag = "silent-ticks-6"
 
 func hapticName(_ raw: Int) -> String {
-    hapticChoices.first { $0.1.rawValue == raw }?.0 ?? "—"
+    hapticChoices.first { $0.id == raw }?.name ?? "—"
 }
 
 /// The same name run through the string catalog, for display. `hapticName`
@@ -232,6 +220,13 @@ func localizedHapticName(_ raw: Int) -> String {
     return String(localized: String.LocalizationValue(key))
 }
 
+/// The short form of a tap's name ("2× Tick"), for rows too narrow for the
+/// full one. Nil for taps that have no short form.
+func localizedShortHapticName(_ raw: Int) -> String? {
+    guard let short = hapticChoices.first(where: { $0.id == raw })?.shortName else { return nil }
+    return String(localized: String.LocalizationValue(short))
+}
+
 /// Pick the reminder tap. Tapping a row **plays it immediately** and selects it;
 /// the selection is what actually fires on every reminder.
 struct ReminderTapView: View {
@@ -240,19 +235,38 @@ struct ReminderTapView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 5) {
-                ForEach(hapticChoices, id: \.0) { name, type in
-                    Button {
-                        selectedRaw = type.rawValue
-                        WKInterfaceDevice.current().play(type)
-                    } label: {
-                        SettingRow(label: LocalizedStringKey(name), checked: type.rawValue == selectedRaw)
-                    }
-                    .buttonStyle(.plain)
+                // The tick names switch to "1× / 2× / 3×" together or not at all.
+                // Deciding row by row would give lists like "Tick / 2× Tick /
+                // Dreifach-Tick", with labels changing as the checkmark moved.
+                ViewThatFits(in: .horizontal) {
+                    rows(hapticChoices.filter(\.isSilent), short: false)
+                    rows(hapticChoices.filter(\.isSilent), short: true)
                 }
+                rows(hapticChoices.filter { !$0.isSilent }, short: false)
             }
             .padding(.horizontal, 8)
         }
         .navigationTitle("Tap Type")
+    }
+
+    private func rows(_ choices: [TapChoice], short: Bool) -> some View {
+        VStack(spacing: 5) {
+            ForEach(choices, id: \.id) { choice in
+                Button {
+                    selectedRaw = choice.id
+                    Haptics.play(choice.haptics)
+                } label: {
+                    SettingRow(label: LocalizedStringKey(short ? choice.shortName ?? choice.name : choice.name),
+                               checked: choice.id == selectedRaw,
+                               silent: choice.isSilent,
+                               spokenLabel: short ? LocalizedStringKey(choice.name) : nil,
+                               // Ticks always keep room for the checkmark, so moving
+                               // the selection can't flip them between full and short.
+                               reserveCheck: choice.isSilent)
+                }
+                .buttonStyle(.plain)
+            }
+        }
     }
 }
 

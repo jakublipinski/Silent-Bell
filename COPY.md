@@ -54,15 +54,15 @@ haptic,vibration,mindfulness,focus,presence,awareness,meditation,adhd,attention,
 A bell you feel instead of hear. Random, silent taps on your wrist — private, unpredictable, never silenced by Focus. Pay once, no subscription, no data collected.
 ```
 
-**Description** (1835/4000)
+**Description** (1874/4000)
 
 ```
 The surprise that wakes your attention up.
 
-Silent Bell taps your wrist at random moments — a mindfulness bell for Apple Watch that never makes a sound. It divides each hour into equal stretches and places one tap at random inside each, so there is no rhythm to learn and nothing to brace for. Every tap arrives unrehearsed: spaced far enough apart to never feel like an alarm, unpredictable enough to keep working. Each one is a small, private question — where is your attention right now?
+Silent Bell taps your wrist at random moments — a mindfulness bell for Apple Watch, silent by default. It divides each hour into equal stretches and places one tap at random inside each, so there is no rhythm to learn and nothing to brace for. Every tap arrives unrehearsed: spaced far enough apart to never feel like an alarm, unpredictable enough to keep working. Each one is a small, private question — where is your attention right now?
 
-TRULY SILENT, TRULY PRIVATE
-No sound. No banner. Nothing on your watch face. Nothing in Notification Center. The people around you will never know — there is nothing to see or hear. Just a gentle tap, felt only by you, even with your wrist down and the screen dark.
+SILENT BY DEFAULT, TRULY PRIVATE
+No banner. Nothing on your watch face. Nothing in Notification Center. The people around you will never know — there is nothing to see. Just a gentle tap, felt only by you, even with your wrist down and the screen dark.
 
 WORKS THROUGH EVERY FOCUS
 Because the taps are not notifications, Do Not Disturb, Sleep and Work Focus cannot silence them. Your iPhone can be in another room, or off entirely — Silent Bell runs on the watch alone.
@@ -70,7 +70,7 @@ Because the taps are not notifications, Do Not Disturb, Sleep and Work Focus can
 MADE TO GET OUT OF THE WAY
 • 1 to 10 taps an hour, placed at random and never clustered
 • A minimum gap, so two taps never land on top of each other
-• Choose how the tap feels, from nine built-in patterns
+• Choose how the tap feels from eleven patterns. Taps marked 🔕 are always silent; the others only in Silent Mode.
 • No account, no network, no analytics — there is no data to collect
 
 AN HONEST NOTE
@@ -116,15 +116,15 @@ haptik,vibration,fokus,meditation,adhs,aufmerksamkeit,atmen,stille,präsenz,inne
 Eine Glocke, die du fühlst statt hörst. Zufällige, stille Impulse am Handgelenk – privat, unvorhersehbar, von keinem Fokus stummgeschaltet. Einmal kaufen, kein Abo.
 ```
 
-**Description** (2137/4000)
+**Description** (2176/4000)
 
 ```
 Die Überraschung, die deine Aufmerksamkeit weckt.
 
-Silent Bell tippt dir in zufälligen Momenten aufs Handgelenk – eine Achtsamkeitsglocke für die Apple Watch, die niemals einen Ton macht. Jede Stunde wird in gleich lange Abschnitte geteilt, und in jedem liegt ein Impuls an zufälliger Stelle. So gibt es keinen Rhythmus zu lernen und nichts, worauf man sich einstellen könnte. Jeder Impuls kommt unerwartet: weit genug vom letzten entfernt, um nie wie ein Wecker zu wirken, unvorhersehbar genug, um wirksam zu bleiben. Jeder ist eine kleine, private Frage – wo ist deine Aufmerksamkeit gerade?
+Silent Bell tippt dir in zufälligen Momenten aufs Handgelenk – eine Achtsamkeitsglocke für die Apple Watch, standardmäßig lautlos. Jede Stunde wird in gleich lange Abschnitte geteilt, und in jedem liegt ein Impuls an zufälliger Stelle. So gibt es keinen Rhythmus zu lernen und nichts, worauf man sich einstellen könnte. Jeder Impuls kommt unerwartet: weit genug vom letzten entfernt, um nie wie ein Wecker zu wirken, unvorhersehbar genug, um wirksam zu bleiben. Jeder ist eine kleine, private Frage – wo ist deine Aufmerksamkeit gerade?
 
-WIRKLICH STILL, WIRKLICH PRIVAT
-Kein Ton. Kein Banner. Nichts auf dem Zifferblatt. Nichts in der Mitteilungszentrale. Die Menschen um dich herum werden es nie bemerken – es gibt nichts zu sehen und nichts zu hören. Nur ein sanfter Impuls, den nur du spürst, auch bei gesenktem Handgelenk und dunklem Display.
+STANDARDMÄSSIG LAUTLOS, WIRKLICH PRIVAT
+Kein Banner. Nichts auf dem Zifferblatt. Nichts in der Mitteilungszentrale. Die Menschen um dich herum werden es nie bemerken – es gibt nichts zu sehen. Nur ein sanfter Impuls, den nur du spürst, auch bei gesenktem Handgelenk und dunklem Display.
 
 FUNKTIONIERT IN JEDEM FOKUS
 Weil die Impulse keine Mitteilungen sind, können „Nicht stören“, „Schlafen“ und „Arbeit“ sie nicht stummschalten. Dein iPhone kann in einem anderen Raum liegen oder ausgeschaltet sein – Silent Bell läuft allein auf der Uhr.
@@ -132,7 +132,7 @@ Weil die Impulse keine Mitteilungen sind, können „Nicht stören“, „Schlaf
 GEMACHT, UM NICHT IM WEG ZU STEHEN
 • 1 bis 10 Impulse pro Stunde, zufällig platziert und nie geballt
 • Ein Mindestabstand, damit zwei Impulse nie aufeinanderfallen
-• Wähle, wie sich der Impuls anfühlt – neun eingebaute Muster
+• Wähle aus elf Mustern, wie sich der Impuls anfühlt. Mit 🔕 markierte Impulse sind immer lautlos, die anderen nur im Stummmodus.
 • Kein Account, kein Netzwerk, keine Analysen – es gibt keine Daten zu sammeln
 
 EINE EHRLICHE ANMERKUNG
@@ -178,15 +178,15 @@ Silent Bell: マインドフルネス
 聞くのではなく、感じる鐘。手首へのランダムで静かな振動は、誰にも気づかれず、集中モードでも止まりません。買い切り、サブスクなし、データ収集なし。
 ```
 
-**Description** (986/4000)
+**Description** (1021/4000)
 
 ```
 注意を呼び覚ます、ささやかな驚き。
 
-Silent Bell は、ランダムなタイミングで手首をそっと叩く Apple Watch 用のマインドフルネス・ベルです。音は一切鳴りません。1時間を等しい区間に分け、それぞれの中のランダムな一点に振動を置きます。覚えられるリズムはなく、身構える対象もありません。どの振動も、不意に訪れます。アラームのように感じない程度に間隔をあけ、慣れてしまわない程度に不規則に。そのひとつひとつが、小さく私的な問いかけです。いま、あなたの注意はどこにありますか。
+Silent Bell は、ランダムなタイミングで手首をそっと叩く Apple Watch 用のマインドフルネス・ベルです。初期設定では音は鳴りません。1時間を等しい区間に分け、それぞれの中のランダムな一点に振動を置きます。覚えられるリズムはなく、身構える対象もありません。どの振動も、不意に訪れます。アラームのように感じない程度に間隔をあけ、慣れてしまわない程度に不規則に。そのひとつひとつが、小さく私的な問いかけです。いま、あなたの注意はどこにありますか。
 
-本当に静かで、本当にプライベート
-音もバナーもありません。文字盤にも通知センターにも何も残りません。周りの人が気づくことはありません。見えるものも聞こえるものもないからです。手首を下ろし、画面が暗いままでも、あなただけが感じる穏やかな振動があるだけです。
+初期設定で無音、本当にプライベート
+バナーはありません。文字盤にも通知センターにも何も残りません。周りの人が気づくことはありません。見えるものが何もないからです。手首を下ろし、画面が暗いままでも、あなただけが感じる穏やかな振動があるだけです。
 
 どの集中モードでも届きます
 振動は通知ではないため、「おやすみモード」「睡眠」「仕事」などの集中モードで止められることはありません。iPhone は別の部屋にあっても、電源が入っていなくてもかまいません。Silent Bell は Apple Watch だけで動作します。
@@ -194,7 +194,7 @@ Silent Bell は、ランダムなタイミングで手首をそっと叩く Appl
 邪魔をしないための設計
 • 1時間に1〜10回、ランダムに配置され、偏りません
 • 最小間隔の設定により、振動が重なることはありません
-• 9種類の内蔵パターンから、振動の感触を選べます
+• 11種類のパターンから振動の感触を選べます。🔕 の付いた振動は常に無音で、そのほかは消音モードのときだけ無音になります。
 • アカウントなし、ネットワークなし、解析なし。集めるデータそのものがありません
 
 正直にお伝えします
@@ -240,27 +240,27 @@ haptique,vibration,méditation,concentration,attention,respiration,tdah,poignet,
 Une cloche que l’on ressent, sans l’entendre. Impulsions aléatoires et silencieuses au poignet, qu’aucun mode Concentration ne fait taire. Achat unique, sans abonnement.
 ```
 
-**Description** (2158/4000)
+**Description** (2209/4000)
 
 ```
 La surprise qui réveille votre attention.
 
-Silent Bell effleure votre poignet à des moments aléatoires : une cloche de pleine conscience pour Apple Watch qui ne fait jamais le moindre bruit. Elle divise chaque heure en intervalles égaux et place une impulsion au hasard dans chacun d’eux. Aucun rythme à apprendre, rien à anticiper. Chaque impulsion arrive sans prévenir : assez espacée de la précédente pour ne jamais ressembler à une alarme, assez imprévisible pour rester efficace. Chacune est une petite question privée — où est votre attention en ce moment ?
+Silent Bell effleure votre poignet à des moments aléatoires : une cloche de pleine conscience pour Apple Watch, silencieuse par défaut. Elle divise chaque heure en intervalles égaux et place une impulsion au hasard dans chacun d’eux. Aucun rythme à apprendre, rien à anticiper. Chaque impulsion arrive sans prévenir : assez espacée de la précédente pour ne jamais ressembler à une alarme, assez imprévisible pour rester efficace. Chacune est une petite question privée — où est votre attention en ce moment ?
 
-VRAIMENT SILENCIEUX, VRAIMENT PRIVÉ
-Aucun son. Aucune bannière. Rien sur le cadran. Rien dans le centre de notifications. Les personnes autour de vous n’en sauront jamais rien : il n’y a rien à voir ni à entendre. Seulement une impulsion douce, que personne d’autre ne ressent, même poignet baissé et écran éteint.
+SILENCIEUX PAR DÉFAUT, VRAIMENT PRIVÉ
+Aucune bannière. Rien sur le cadran. Rien dans le centre de notifications. Les personnes autour de vous n’en sauront jamais rien : il n’y a rien à voir. Seulement une impulsion douce, que personne d’autre ne ressent, même poignet baissé et écran éteint.
 
 FONCTIONNE DANS TOUS LES MODES DE CONCENTRATION
-Comme les impulsions ne sont pas des notifications, Ne pas déranger, Sommeil et Travail ne peuvent pas les faire taire. Votre iPhone peut être dans une autre pièce, ou éteint : Silent Bell fonctionne sur la montre seule.
+Comme les impulsions ne sont pas des notifications, Ne pas déranger, Sommeil et Travail ne peuvent pas les faire taire. Votre iPhone peut être dans une autre pièce, ou éteint : Silent Bell fonctionne sur la montre seule.
 
 CONÇU POUR SE FAIRE OUBLIER
 • 1 à 10 impulsions par heure, placées au hasard et jamais groupées
 • Un écart minimum, pour que deux impulsions ne se superposent jamais
-• Choisissez la sensation parmi neuf motifs intégrés
+• Choisissez la sensation parmi onze motifs. Les impulsions marquées 🔕 sont toujours silencieuses ; les autres, seulement en mode Silence.
 • Aucun compte, aucun réseau, aucune analyse — aucune donnée à collecter
 
 UNE NOTE HONNÊTE
-Apple limite à une heure le temps d’exécution en arrière-plan de toute application. Lorsque Silent Bell atteint cette limite, elle se met en pause avec un motif distinct que vous apprendrez à reconnaître ; une seule touche la relance. C’est une limite de la plateforme, pas un choix, et elle fait une cloche honnête à sa manière : une fois par heure, vous remarquez que le fait de remarquer s’était arrêté, et vous choisissez de recommencer.
+Apple limite à une heure le temps d’exécution en arrière-plan de toute application. Lorsque Silent Bell atteint cette limite, elle se met en pause avec un motif distinct que vous apprendrez à reconnaître ; une seule touche la relance. C’est une limite de la plateforme, pas un choix, et elle fait une cloche honnête à sa manière : une fois par heure, vous remarquez que le fait de remarquer s’était arrêté, et vous choisissez de recommencer.
 
 CONFIGURATION REQUISE
 Apple Watch avec watchOS 10 ou version ultérieure. Aucune application iPhone à installer.
@@ -271,7 +271,7 @@ Le code source est public et vérifiable sur github.com/jakublipinski/Silent-Bel
 **What's New — 1.0.3**
 
 ```
-• Accessibilité : prise en charge de VoiceOver.
+• Accessibilité : prise en charge de VoiceOver.
 ```
 
 ---
@@ -302,15 +302,15 @@ háptico,vibración,meditación,concentración,tdah,respiración,muñeca,presenc
 Una campana que se siente en lugar de oírse. Toques aleatorios y silenciosos en la muñeca que ningún modo de concentración silencia. Pago único, sin suscripción.
 ```
 
-**Description** (1964/4000)
+**Description** (2010/4000)
 
 ```
 La sorpresa que despierta tu atención.
 
-Silent Bell te toca la muñeca en momentos aleatorios: una campana de atención plena para Apple Watch que nunca emite un sonido. Divide cada hora en tramos iguales y coloca un toque al azar dentro de cada uno, así que no hay ritmo que aprender ni nada que anticipar. Cada toque llega sin avisar: lo bastante separado del anterior para no parecer una alarma, lo bastante impredecible para seguir funcionando. Cada uno es una pequeña pregunta privada: ¿dónde está tu atención ahora mismo?
+Silent Bell te toca la muñeca en momentos aleatorios: una campana de atención plena para Apple Watch, silenciosa por defecto. Divide cada hora en tramos iguales y coloca un toque al azar dentro de cada uno, así que no hay ritmo que aprender ni nada que anticipar. Cada toque llega sin avisar: lo bastante separado del anterior para no parecer una alarma, lo bastante impredecible para seguir funcionando. Cada uno es una pequeña pregunta privada: ¿dónde está tu atención ahora mismo?
 
-VERDADERAMENTE SILENCIOSO, VERDADERAMENTE PRIVADO
-Sin sonido. Sin avisos. Nada en la esfera. Nada en el centro de notificaciones. Quienes te rodean nunca lo sabrán: no hay nada que ver ni que oír. Solo un toque suave, que sientes únicamente tú, incluso con la muñeca baja y la pantalla apagada.
+SILENCIOSO POR DEFECTO, VERDADERAMENTE PRIVADO
+Sin avisos. Nada en la esfera. Nada en el centro de notificaciones. Quienes te rodean nunca lo sabrán: no hay nada que ver. Solo un toque suave, que sientes únicamente tú, incluso con la muñeca baja y la pantalla apagada.
 
 FUNCIONA CON CUALQUIER MODO DE CONCENTRACIÓN
 Como los toques no son notificaciones, No molestar, Dormir y Trabajo no pueden silenciarlos. Tu iPhone puede estar en otra habitación, o apagado: Silent Bell funciona solo en el reloj.
@@ -318,7 +318,7 @@ Como los toques no son notificaciones, No molestar, Dormir y Trabajo no pueden s
 HECHO PARA NO ESTORBAR
 • De 1 a 10 toques por hora, colocados al azar y nunca agrupados
 • Un intervalo mínimo, para que dos toques nunca se solapen
-• Elige cómo se siente el toque entre nueve patrones integrados
+• Elige cómo se siente el toque entre once patrones. Los toques marcados con 🔕 siempre son silenciosos; los demás, solo en modo silencio.
 • Sin cuenta, sin red, sin analíticas: no hay datos que recoger
 
 UNA NOTA HONESTA
