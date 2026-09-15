@@ -82,10 +82,11 @@ Apple Watch with watchOS 10 or later. There is no iPhone app to install.
 The source code is public and auditable at github.com/jakublipinski/Silent-Bell — every line the app runs, readable by anyone.
 ```
 
-**What's New — 1.0.3**
+**What's New — 1.0.4**
 
 ```
-• Accessibility: VoiceOver support.
+• New silent taps, marked 🔕: silent even when Silent Mode is off. Double tick is the new default.
+• Start and Stop now play your chosen tap.
 ```
 
 ---
@@ -144,10 +145,11 @@ Apple Watch mit watchOS 10 oder neuer. Es gibt keine iPhone-App zu installieren.
 Der Quellcode ist öffentlich und überprüfbar auf github.com/jakublipinski/Silent-Bell – jede Zeile, die die App ausführt, für jeden lesbar.
 ```
 
-**What's New — 1.0.3**
+**What's New — 1.0.4**
 
 ```
-• Bedienungshilfen: Unterstützung für VoiceOver.
+• Neue lautlose Impulse, mit 🔕 markiert: lautlos, auch wenn der Stummmodus aus ist. Doppel-Tick ist der neue Standard.
+• Start und Stopp spielen jetzt deinen gewählten Impuls.
 ```
 
 ---
@@ -206,10 +208,11 @@ watchOS 10 以降の Apple Watch。インストールする iPhone アプリは�
 ソースコードは github.com/jakublipinski/Silent-Bell で公開・検証可能です。アプリが実行するすべての行を、誰でも読むことができます。
 ```
 
-**What's New — 1.0.3**
+**What's New — 1.0.4**
 
 ```
-• アクセシビリティ：VoiceOver に対応しました。
+• 🔕 の付いた無音の振動を追加しました。消音モードがオフでも鳴りません。初期設定はカチカチになりました。
+• 開始と停止の合図も、選んだ振動になりました。
 ```
 
 ---
@@ -268,10 +271,11 @@ Apple Watch avec watchOS 10 ou version ultérieure. Aucune application iPhone à
 Le code source est public et vérifiable sur github.com/jakublipinski/Silent-Bell — chaque ligne exécutée par l’application, lisible par tous.
 ```
 
-**What's New — 1.0.3**
+**What's New — 1.0.4**
 
 ```
-• Accessibilité : prise en charge de VoiceOver.
+• Nouvelles impulsions silencieuses, marquées 🔕 : silencieuses même hors du mode Silence. Double tic devient le réglage par défaut.
+• Démarrer et Arrêter jouent désormais l’impulsion choisie.
 ```
 
 ---
@@ -330,10 +334,11 @@ Apple Watch con watchOS 10 o posterior. No hay ninguna app de iPhone que instala
 El código fuente es público y auditable en github.com/jakublipinski/Silent-Bell: cada línea que ejecuta la app, legible por cualquiera.
 ```
 
-**What's New — 1.0.3**
+**What's New — 1.0.4**
 
 ```
-• Accesibilidad: compatibilidad con VoiceOver.
+• Nuevos toques silenciosos, marcados con 🔕: silenciosos incluso sin el modo silencio. Doble tic es el nuevo toque predeterminado.
+• Iniciar y Detener reproducen ahora el toque elegido.
 ```
 
 ---
