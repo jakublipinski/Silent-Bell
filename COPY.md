@@ -12,6 +12,8 @@ Character limits are hard caps enforced by App Store Connect. Counts below were 
 | Promotional text | 170 | Editable without review |
 | Description | 4000 | Barely indexed; does the selling |
 
+**No emoji in Description or What's New** — App Store Connect rejects them. Name things in words instead (the silent taps are named, not marked).
+
 **Never repeat a word between name, subtitle and keywords.** Apple indexes each term once, so repetition spends the budget twice for one result.
 
 ## Category
@@ -54,7 +56,7 @@ haptic,vibration,mindfulness,focus,presence,awareness,meditation,adhd,attention,
 A bell you feel instead of hear. Random, silent taps on your wrist — private, unpredictable, never silenced by Focus. Pay once, no subscription, no data collected.
 ```
 
-**Description** (1874/4000)
+**Description** (1894/4000)
 
 ```
 The surprise that wakes your attention up.
@@ -70,7 +72,7 @@ Because the taps are not notifications, Do Not Disturb, Sleep and Work Focus can
 MADE TO GET OUT OF THE WAY
 • 1 to 10 taps an hour, placed at random and never clustered
 • A minimum gap, so two taps never land on top of each other
-• Choose how the tap feels from eleven patterns. Taps marked 🔕 are always silent; the others only in Silent Mode.
+• Choose how the tap feels from eleven patterns. Tick, Double tick and Triple tick are always silent; the others only in Silent Mode.
 • No account, no network, no analytics — there is no data to collect
 
 AN HONEST NOTE
@@ -85,7 +87,7 @@ The source code is public and auditable at github.com/jakublipinski/Silent-Bell 
 **What's New — 1.0.4**
 
 ```
-• New silent taps, marked 🔕: silent even when Silent Mode is off. Double tick is the new default.
+• New Double tick and Triple tick taps. Like Tick, they are silent even when Silent Mode is off. Double tick is the new default.
 • Start and Stop now play your chosen tap.
 ```
 
@@ -117,7 +119,7 @@ haptik,vibration,fokus,meditation,adhs,aufmerksamkeit,atmen,stille,präsenz,inne
 Eine Glocke, die du fühlst statt hörst. Zufällige, stille Impulse am Handgelenk – privat, unvorhersehbar, von keinem Fokus stummgeschaltet. Einmal kaufen, kein Abo.
 ```
 
-**Description** (2176/4000)
+**Description** (2188/4000)
 
 ```
 Die Überraschung, die deine Aufmerksamkeit weckt.
@@ -133,7 +135,7 @@ Weil die Impulse keine Mitteilungen sind, können „Nicht stören“, „Schlaf
 GEMACHT, UM NICHT IM WEG ZU STEHEN
 • 1 bis 10 Impulse pro Stunde, zufällig platziert und nie geballt
 • Ein Mindestabstand, damit zwei Impulse nie aufeinanderfallen
-• Wähle aus elf Mustern, wie sich der Impuls anfühlt. Mit 🔕 markierte Impulse sind immer lautlos, die anderen nur im Stummmodus.
+• Wähle aus elf Mustern, wie sich der Impuls anfühlt. Tick, Doppel-Tick und Dreifach-Tick sind immer lautlos, die anderen nur im Stummmodus.
 • Kein Account, kein Netzwerk, keine Analysen – es gibt keine Daten zu sammeln
 
 EINE EHRLICHE ANMERKUNG
@@ -148,7 +150,7 @@ Der Quellcode ist öffentlich und überprüfbar auf github.com/jakublipinski/Sil
 **What's New — 1.0.4**
 
 ```
-• Neue lautlose Impulse, mit 🔕 markiert: lautlos, auch wenn der Stummmodus aus ist. Doppel-Tick ist der neue Standard.
+• Neue Impulse Doppel-Tick und Dreifach-Tick. Wie Tick sind sie lautlos, auch wenn der Stummmodus aus ist. Doppel-Tick ist der neue Standard.
 • Start und Stopp spielen jetzt deinen gewählten Impuls.
 ```
 
@@ -180,7 +182,7 @@ Silent Bell: マインドフルネス
 聞くのではなく、感じる鐘。手首へのランダムで静かな振動は、誰にも気づかれず、集中モードでも止まりません。買い切り、サブスクなし、データ収集なし。
 ```
 
-**Description** (1021/4000)
+**Description** (1028/4000)
 
 ```
 注意を呼び覚ます、ささやかな驚き。
@@ -196,7 +198,7 @@ Silent Bell は、ランダムなタイミングで手首をそっと叩く Appl
 邪魔をしないための設計
 • 1時間に1〜10回、ランダムに配置され、偏りません
 • 最小間隔の設定により、振動が重なることはありません
-• 11種類のパターンから振動の感触を選べます。🔕 の付いた振動は常に無音で、そのほかは消音モードのときだけ無音になります。
+• 11種類のパターンから振動の感触を選べます。カチッ、カチカチ、カチカチカチは常に無音で、そのほかは消音モードのときだけ無音になります。
 • アカウントなし、ネットワークなし、解析なし。集めるデータそのものがありません
 
 正直にお伝えします
@@ -211,7 +213,7 @@ watchOS 10 以降の Apple Watch。インストールする iPhone アプリは�
 **What's New — 1.0.4**
 
 ```
-• 🔕 の付いた無音の振動を追加しました。消音モードがオフでも鳴りません。初期設定はカチカチになりました。
+• 新しい振動「カチカチ」「カチカチカチ」を追加しました。「カチッ」と同じく、消音モードがオフでも無音です。初期設定はカチカチになりました。
 • 開始と停止の合図も、選んだ振動になりました。
 ```
 
@@ -243,7 +245,7 @@ haptique,vibration,méditation,concentration,attention,respiration,tdah,poignet,
 Une cloche que l’on ressent, sans l’entendre. Impulsions aléatoires et silencieuses au poignet, qu’aucun mode Concentration ne fait taire. Achat unique, sans abonnement.
 ```
 
-**Description** (2209/4000)
+**Description** (2211/4000)
 
 ```
 La surprise qui réveille votre attention.
@@ -259,7 +261,7 @@ Comme les impulsions ne sont pas des notifications, Ne pas déranger, Sommeil et
 CONÇU POUR SE FAIRE OUBLIER
 • 1 à 10 impulsions par heure, placées au hasard et jamais groupées
 • Un écart minimum, pour que deux impulsions ne se superposent jamais
-• Choisissez la sensation parmi onze motifs. Les impulsions marquées 🔕 sont toujours silencieuses ; les autres, seulement en mode Silence.
+• Choisissez la sensation parmi onze motifs. Tic, Double tic et Triple tic sont toujours silencieux ; les autres, seulement en mode Silence.
 • Aucun compte, aucun réseau, aucune analyse — aucune donnée à collecter
 
 UNE NOTE HONNÊTE
@@ -274,7 +276,7 @@ Le code source est public et vérifiable sur github.com/jakublipinski/Silent-Bel
 **What's New — 1.0.4**
 
 ```
-• Nouvelles impulsions silencieuses, marquées 🔕 : silencieuses même hors du mode Silence. Double tic devient le réglage par défaut.
+• Nouvelles impulsions Double tic et Triple tic. Comme Tic, elles sont silencieuses même hors du mode Silence. Double tic devient le réglage par défaut.
 • Démarrer et Arrêter jouent désormais l’impulsion choisie.
 ```
 
@@ -306,7 +308,7 @@ háptico,vibración,meditación,concentración,tdah,respiración,muñeca,presenc
 Una campana que se siente en lugar de oírse. Toques aleatorios y silenciosos en la muñeca que ningún modo de concentración silencia. Pago único, sin suscripción.
 ```
 
-**Description** (2010/4000)
+**Description** (2012/4000)
 
 ```
 La sorpresa que despierta tu atención.
@@ -322,7 +324,7 @@ Como los toques no son notificaciones, No molestar, Dormir y Trabajo no pueden s
 HECHO PARA NO ESTORBAR
 • De 1 a 10 toques por hora, colocados al azar y nunca agrupados
 • Un intervalo mínimo, para que dos toques nunca se solapen
-• Elige cómo se siente el toque entre once patrones. Los toques marcados con 🔕 siempre son silenciosos; los demás, solo en modo silencio.
+• Elige cómo se siente el toque entre once patrones. Tic, Doble tic y Triple tic siempre son silenciosos; los demás, solo en modo silencio.
 • Sin cuenta, sin red, sin analíticas: no hay datos que recoger
 
 UNA NOTA HONESTA
@@ -337,7 +339,7 @@ El código fuente es público y auditable en github.com/jakublipinski/Silent-Bel
 **What's New — 1.0.4**
 
 ```
-• Nuevos toques silenciosos, marcados con 🔕: silenciosos incluso sin el modo silencio. Doble tic es el nuevo toque predeterminado.
+• Nuevos toques Doble tic y Triple tic. Como Tic, son silenciosos incluso sin el modo silencio. Doble tic es el nuevo toque predeterminado.
 • Iniciar y Detener reproducen ahora el toque elegido.
 ```
 
